@@ -44,8 +44,8 @@ class mainWindow():
             266.0,
             fill="#FFFFFF",
             outline="")
-
-        rect = canvas.create_rectangle(
+        # Rectangle for file content
+        canvas.create_rectangle(
             
             191.0,
             68.0,
@@ -53,24 +53,35 @@ class mainWindow():
             235.0,
             fill="#FFFFFF",
             outline="")
-        # Rectangle for file content
+        
         frame = Frame(window, width = 518, height = 235)
         frame.pack()
         frame.place(
             x = 191.0,
             y = 68.0,
         )
-        canvas.grid(row = 3, column = 3)
-        label1 = Label(frame, text = "Hello Worldsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaassssssssssssssssssss").grid(row = 2, column = 1)        
-        
-
-        canvas.create_rectangle(           
-            191.0,
-            68.0,
-            518.0,
-            235.0,
-            fill="#FFFFFF",
-            outline="")       
+        canvas.grid(row = 1, column = 1)
+        # label1 = Label(frame, text = "Hello Worldsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaassssssssssssssssssss")      
+        # label1.grid(row = 2, column = 1)
+        # label2 = Label(frame, text = "Hello Worldsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaassssssssssssssssssss")      
+        # label2.grid(row = 2, column = 2)
+        cols=['Col1','Col2','Col3']
+        data = [ ["val1", "val2", "val3"],
+                ["asd1", "asd2", "asd3"],
+                ["bbb1", "bbb3", "bbb4"],
+                ["ccc1", "ccc3", "ccc4"],
+                ["ddd1", "ddd3", "ddd4"],
+                ["eee1", "eee3", "eee4"] ]
+        for y in range(len(data)+1):
+            for x in range(len(cols)):
+                if y==0:
+                    e=Label(frame, font=("RobotoRoman Regular", 9 * -1),bg='light blue',justify='center', text = cols[x])
+                    e.grid(column=x, row=y)
+                    # e.insert(0,cols[x])
+                else:
+                    e=Label(frame, text = data[y-1][x])
+                    e.grid(column=x, row=y)
+                                     
         
 
         canvas.create_rectangle(
