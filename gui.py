@@ -8,6 +8,7 @@ from pathlib import Path
 # from tkinter import *
 # Explicit imports to satisfy Flake8
 from tkinter import *
+from tkinter import ttk
 from openFile import *
 
 OUTPUT_PATH = Path(__file__).parent
@@ -21,16 +22,16 @@ class mainWindow():
     def __init__(self):
         
         window = Tk()
-
-        window.geometry("661x324")
+        window.title("Search Engine")
+        window.geometry("661x350")
         window.configure(bg = "#FFF5E4")
 
         #set up GUI with canvas
         canvas = Canvas(
             window,
             bg = "#FFF5E4",
-            height = 324,
-            width = 661,
+            height = 800,
+            width = 1000,
             bd = 0,
             highlightthickness = 0,
             relief = "ridge"
@@ -45,44 +46,15 @@ class mainWindow():
             fill="#FFFFFF",
             outline="")
         # Rectangle for file content
-        canvas.create_rectangle(
-            
-            191.0,
-            68.0,
-            518.0,
-            235.0,
-            fill="#FFFFFF",
-            outline="")
-        
-        frame = Frame(window, width = 518, height = 235)
-        frame.pack()
+       
+        frame = Frame(window, width = 450, height = 200)
         frame.place(
             x = 191.0,
             y = 68.0,
-        )
-        canvas.grid(row = 1, column = 1)
-        # label1 = Label(frame, text = "Hello Worldsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaassssssssssssssssssss")      
-        # label1.grid(row = 2, column = 1)
-        # label2 = Label(frame, text = "Hello Worldsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaassssssssssssssssssss")      
-        # label2.grid(row = 2, column = 2)
-        cols=['Col1','Col2','Col3']
-        data = [ ["val1", "val2", "val3"],
-                ["asd1", "asd2", "asd3"],
-                ["bbb1", "bbb3", "bbb4"],
-                ["ccc1", "ccc3", "ccc4"],
-                ["ddd1", "ddd3", "ddd4"],
-                ["eee1", "eee3", "eee4"] ]
-        for y in range(len(data)+1):
-            for x in range(len(cols)):
-                if y==0:
-                    e=Label(frame, font=("RobotoRoman Regular", 9 * -1),bg='light blue',justify='center', text = cols[x])
-                    e.grid(column=x, row=y)
-                    # e.insert(0,cols[x])
-                else:
-                    e=Label(frame, text = data[y-1][x])
-                    e.grid(column=x, row=y)
-                                     
+        )      
         
+
+        canvas.grid(row = 2, column = 3)   
 
         canvas.create_rectangle(
             190.0,
@@ -100,7 +72,7 @@ class mainWindow():
             image=button_image_1,
             borderwidth=0,
             highlightthickness=0,
-            command = lambda: open_xml(),
+            command = lambda: display_xml(frame, window),
             relief="flat"
         )
         button_1.place(
@@ -173,7 +145,7 @@ class mainWindow():
 
         canvas.create_text(
             438.0,
-            274.0,
+            300.0,
             anchor="nw",
             text="50",
             fill="#EE6983",
@@ -183,7 +155,7 @@ class mainWindow():
 
         canvas.create_text(
             437.0,
-            253.0,
+            280.0,
             anchor="nw",
             text="Sentences",
             fill="#000000",
@@ -192,7 +164,7 @@ class mainWindow():
 
         canvas.create_text(
             325.0,
-            274.0,
+            300.0,
             anchor="nw",
             text="980",
             fill="#EE6983",
@@ -201,7 +173,7 @@ class mainWindow():
 
         canvas.create_text(
             328.0,
-            253.0,
+            280.0,
             anchor="nw",
             text="Words",
             fill="#000000",
@@ -210,7 +182,7 @@ class mainWindow():
 
         canvas.create_text(
             211.0,
-            274.0,
+            300.0,
             anchor="nw",
             text="1090",
             fill="#EE6983",
@@ -219,13 +191,13 @@ class mainWindow():
 
         canvas.create_text(
             210.0,
-            253.0,
+            280.0,
             anchor="nw",
             text="Characters",
             fill="#000000",
             font=("RobotoRoman Regular", 14 * -1)
         )
-        window.resizable(False, False)
+        window.resizable(True, True)
         window.mainloop()
 
 mainWindow = mainWindow()
