@@ -39,7 +39,7 @@ def parse_xml():
 
     root = tree.getroot()
     cols = ["PMID", "Journal ISSN",  "Journal Title", "ISO Abbreviation", 
-    "Article Title", "Language", "Abstract", "Author", "Publication Type"]
+    "Article Title", "Language", "Abstract", "Author", "Publication Type", "Journal Country", "Keyword List"]
     rows = []
     for paper in root.findall('PubmedArticle'):  
         PMID = paper.find('MedlineCitation/PMID').text
@@ -52,6 +52,8 @@ def parse_xml():
         AuthorList = Article.findall('AuthorList/Author')
         Language = Article.find('Language').text
         PublicationTypeList = Article.findall('PublicationTypeList/PublicationType')
+        JournalCountry = paper.find('MedlineCitation/MedlineJournalInfo/Country').text
+        KeywordList = paper.findall('MedlineCitation/KeywordList/Keyword')
         # rows.append({
         #     "PMID": PMID, 
         #     "JournalISSN": JournalISSN,
@@ -73,6 +75,8 @@ def parse_xml():
             AbstractList,
             AuthorList,
             PublicationTypeList,
+            JournalCountry,
+            KeywordList,
         ])
     return rows, cols
 def display_xml(frame):
@@ -113,12 +117,15 @@ def display_xml(frame):
             Language,
             AbstractList,
             AuthorList,
-            PublicationTypeList) in enumerate(rows, start = 1):
+            PublicationTypeList,
+            JournalCountry,
+            KeywordList) in enumerate(rows, start = 1):
                 listBox.insert("", "end", values=(PMID, JournalISSN, JournalTitle, ISOAbbreviation, ArticleTitle, Language, ', '.join([item.text for item in AbstractList]),
                 ', '.join(['{0} {1}'.format(item.findall('ForeName')[0].text, item.findall('LastName')[0].text) for item in AuthorList]),
                 ', '.join([item.text for item in PublicationTypeList]),
+                JournalCountry, ', '.join([item.text for item in KeywordList]),
                 ))
-                print([item.text for item in PublicationTypeList])
+                print(item.text for item in KeywordList)
                 # journalissn = listBox.insert("", "end", text= JournalISSN)
                 # isoabbreviation = listBox.insert("", "end", text= ISOAbbreviation)
                 # articletitle = listBox.insert("", "end", text=ArticleTitle)
