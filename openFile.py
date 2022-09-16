@@ -34,7 +34,8 @@ def open_json():
     )
     return filename
 def parse_xml():
-    tree = ET.parse(r'D:\NCKU\Biomedical Information Retrieval\HW1\Data\test1.xml')
+    filename = open_xml()
+    tree = ET.parse(filename)
 
     root = tree.getroot()
     cols = ["PMID", "Journal ISSN",  "Journal Title", "ISO Abbreviation", 
@@ -74,7 +75,7 @@ def parse_xml():
             PublicationTypeList,
         ])
     return rows, cols
-def display_xml(frame, window):
+def display_xml(frame):
     rows, cols = parse_xml()
     # for y in range(len(rows)+1):
     #         for x in range(len(cols)):
@@ -113,11 +114,11 @@ def display_xml(frame, window):
             AbstractList,
             AuthorList,
             PublicationTypeList) in enumerate(rows, start = 1):
-                listBox.insert("", "end", values=(PMID, JournalISSN, JournalTitle, ISOAbbreviation, ArticleTitle, Language, [item.text for item in AbstractList],
-                ['{0} {1}'.format(item.findall('ForeName')[0].text, item.findall('LastName')[0].text) for item in AuthorList],
-                [item.text for item in PublicationTypeList],
+                listBox.insert("", "end", values=(PMID, JournalISSN, JournalTitle, ISOAbbreviation, ArticleTitle, Language, ', '.join([item.text for item in AbstractList]),
+                ', '.join(['{0} {1}'.format(item.findall('ForeName')[0].text, item.findall('LastName')[0].text) for item in AuthorList]),
+                ', '.join([item.text for item in PublicationTypeList]),
                 ))
-
+                print([item.text for item in PublicationTypeList])
                 # journalissn = listBox.insert("", "end", text= JournalISSN)
                 # isoabbreviation = listBox.insert("", "end", text= ISOAbbreviation)
                 # articletitle = listBox.insert("", "end", text=ArticleTitle)

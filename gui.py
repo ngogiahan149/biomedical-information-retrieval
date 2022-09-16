@@ -72,7 +72,7 @@ class mainWindow():
             image=button_image_1,
             borderwidth=0,
             highlightthickness=0,
-            command = lambda: display_xml(frame, window),
+            command = lambda: display_xml(frame),
             relief="flat"
         )
         button_1.place(
