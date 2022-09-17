@@ -10,7 +10,7 @@ from pathlib import Path
 from tkinter import *
 from tkinter import ttk
 from openFile import *
-
+from count import *
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
 
@@ -23,7 +23,7 @@ class mainWindow():
         
         window = Tk()
         window.title("Search Engine")
-        window.geometry("661x350")
+        window.geometry("1300x800")
         window.configure(bg = "#FFF5E4")
 
         #set up GUI with canvas
@@ -31,7 +31,7 @@ class mainWindow():
             window,
             bg = "#FFF5E4",
             height = 800,
-            width = 1000,
+            width = 1300,
             bd = 0,
             highlightthickness = 0,
             relief = "ridge"
@@ -47,15 +47,22 @@ class mainWindow():
             outline="")
         # Rectangle for file content
        
-        frame = Frame(window, width = 450, height = 200)
+        frame = Frame(canvas, width = 1000, height = 700)
         frame.place(
             x = 191.0,
             y = 68.0,
-        )      
-        
-
-        canvas.grid(row = 2, column = 3)   
-
+        )       
+        # canvas.create_window(0, 0, window = frame)
+        # scroll_canvas = Canvas(frame)
+        # scroll_frame = Frame(scroll_canvas, width = 950, height = 700)
+        # scrollbar = Scrollbar(frame, orient="vertical", command=canvas.yview)
+        # scroll_frame.bind(
+        # "<Configure>",
+        # lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
+        # scroll_canvas.create_window(0,0, window=scroll_frame, anchor='nw')
+        # scroll_canvas.configure(yscrollcommand=scrollbar.set)
+        canvas.grid(row = 3, column = 3)
+        # scroll_canvas.place(relheight=1, relwidth=0.99)
         canvas.create_rectangle(
             190.0,
             25.0,
@@ -72,7 +79,7 @@ class mainWindow():
             image=button_image_1,
             borderwidth=0,
             highlightthickness=0,
-            command = lambda: display_xml(frame),
+            command = lambda: display_xml(frame, canvas),
             relief="flat"
         )
         button_1.place(
@@ -88,7 +95,7 @@ class mainWindow():
             image=button_image_2,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: open_json(),
+            command=lambda: display_json(frame, canvas),
             relief="flat"
         )
         button_2.place(
@@ -142,20 +149,20 @@ class mainWindow():
             fill="#000000",
             font=("RobotoRoman Regular", 9 * -1)
         )
-
-        canvas.create_text(
-            438.0,
-            300.0,
-            anchor="nw",
-            text="50",
-            fill="#EE6983",
-            font=("RobotoCondensed Bold", 30 * -1),
+        # # Number of sentences
+        # canvas.create_text(
+        #     33,
+        #     400.0,
+        #     anchor="nw",
+        #     text= count_sentences_xml(),
+        #     fill="#EE6983",
+        #     font=("RobotoCondensed Bold", 30 * -1),
             
-        )
+        # )
 
         canvas.create_text(
-            437.0,
-            280.0,
+            33,
+            380.0,
             anchor="nw",
             text="Sentences",
             fill="#000000",
@@ -163,8 +170,8 @@ class mainWindow():
         )
 
         canvas.create_text(
-            325.0,
-            300.0,
+            33,
+            350.0,
             anchor="nw",
             text="980",
             fill="#EE6983",
@@ -172,8 +179,8 @@ class mainWindow():
         )
 
         canvas.create_text(
-            328.0,
-            280.0,
+            33,
+            330,
             anchor="nw",
             text="Words",
             fill="#000000",
@@ -181,7 +188,7 @@ class mainWindow():
         )
 
         canvas.create_text(
-            211.0,
+            33,
             300.0,
             anchor="nw",
             text="1090",
@@ -190,7 +197,7 @@ class mainWindow():
         )
 
         canvas.create_text(
-            210.0,
+            33,
             280.0,
             anchor="nw",
             text="Characters",
