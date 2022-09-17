@@ -1,7 +1,7 @@
 from openFile import *
 import nltk, re
 from nltk.tokenize import sent_tokenize
-from gensim.similarities import 
+ 
 #nltk.download('stopwords')
 text = "In late summer 1945, guests are gathered for the wedding reception of Don Vito Corleones " + \
        "daughter Connie (Talia Shire) and Carlo Rizzi (Gianni Russo). Vito (Marlon Brando),"  + \
@@ -75,5 +75,4 @@ def preprocessing(text):
                     else:
                         sentence_scores[sent] += word_frequencies[word]
     print("sentence scores ", sentence_scores)
-    print summarize(text)
 preprocessing(text)                        
