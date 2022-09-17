@@ -10,7 +10,7 @@ from pathlib import Path
 from tkinter import *
 from tkinter import ttk
 from openFile import *
-from count import *
+from textSummarize import *
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
 
@@ -162,7 +162,7 @@ class mainWindow():
 
         canvas.create_text(
             33,
-            380.0,
+            420.0,
             anchor="nw",
             text="Sentences",
             fill="#000000",
@@ -171,7 +171,7 @@ class mainWindow():
 
         canvas.create_text(
             33,
-            350.0,
+            370.0,
             anchor="nw",
             text="980",
             fill="#EE6983",
@@ -180,7 +180,7 @@ class mainWindow():
 
         canvas.create_text(
             33,
-            330,
+            350,
             anchor="nw",
             text="Words",
             fill="#000000",

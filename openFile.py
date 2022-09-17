@@ -4,7 +4,7 @@ from tkinter.messagebox import showinfo
 import xml.etree.ElementTree as ET
 import pandas as pd
 import json
-from count import *
+from textSummarize import *
 
 def open_xml():
     filetypes = (
@@ -145,7 +145,7 @@ def display_xml(frame, canvas):
     # Number of sentences
     canvas.create_text(
         33,
-        400.0,
+        440.0,
         anchor="nw",
         text= count_sentences_xml(rows),
         fill="#EE6983",
