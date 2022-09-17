@@ -1,21 +1,9 @@
 from openFile import *
-import nltk, re
+import nltk, re, heapq, string
 from nltk.tokenize import sent_tokenize
  
 #nltk.download('stopwords')
-text = "In late summer 1945, guests are gathered for the wedding reception of Don Vito Corleones " + \
-       "daughter Connie (Talia Shire) and Carlo Rizzi (Gianni Russo). Vito (Marlon Brando),"  + \
-       "the head of the Corleone Mafia family, is known to friends and associates as Godfather. "  + \
-       "He and Tom Hagen (Robert Duvall), the Corleone family lawyer, are hearing requests for favors "  + \
-       "because, according to Italian tradition, no Sicilian can refuse a request on his daughter's wedding " + \
-       " day. One of the men who asks the Don for a favor is Amerigo Bonasera, a successful mortician "  + \
-       "and acquaintance of the Don, whose daughter was brutally beaten by two young men because she"  + \
-       "refused their advances; the men received minimal punishment from the presiding judge. " + \
-       "The Don is disappointed in Bonasera, who'd avoided most contact with the Don due to Corleone's" + \
-       "nefarious business dealings. The Don's wife is godmother to Bonasera's shamed daughter, " + \
-       "a relationship the Don uses to extract new loyalty from the undertaker. The Don agrees " + \
-       "to have his men punish the young men responsible (in a non-lethal manner) in return for " + \
-        "future service if necessary."
+text = "In late, summer 1945. I, was a child. Hi; I can't. I'm"
 def count_sentences_xml(rows):
 
     for i, (PMID, 
@@ -47,7 +35,6 @@ def preprocessing(text):
     #Convert text to sentence list
     sentence_list = nltk.sent_tokenize(text)
     stopwords = nltk.corpus.stopwords.words('english')
-
     #Find word scores
     word_frequencies = {}
     for word in nltk.word_tokenize(formatted_article_text):
@@ -56,7 +43,18 @@ def preprocessing(text):
                 word_frequencies[word] = 1
             else:
                 word_frequencies[word] += 1
-    print("Word frquency: ", word_frequencies)
+    format_word_frequencies = list(filter(lambda token: token not in string.punctuation, word_frequencies))
+    print("Word frquency: ", format_word_frequencies)
+    print("Total Word", len(format_word_frequencies))
+    #Find character scores and total
+    char_frequencies = {}
+    for char in format_word_frequencies:
+        if char not in char_frequencies.keys():
+            char_frequencies[char] = 1
+        else:
+            char_frequencies[char] += 1
+    print("Character frquency: ", char_frequencies)
+    print("Total characters", len(char_frequencies))
     #Find weighted frequency
     maximum_frequncy = max(word_frequencies.values())
 
@@ -64,6 +62,9 @@ def preprocessing(text):
     for word in word_frequencies.keys():
         word_weighted[word] = (word_frequencies[word]/maximum_frequncy)
     print("Word weighted: ", word_weighted)
+
+    
+
     #Find sentence scores
     sentence_scores = {}
     for sent in sentence_list:
@@ -75,4 +76,9 @@ def preprocessing(text):
                     else:
                         sentence_scores[sent] += word_frequencies[word]
     print("sentence scores ", sentence_scores)
+    summary_sentences = heapq.nlargest(7, sentence_scores, key=sentence_scores.get)
+
+    summary = ' '.join(summary_sentences)
+    print(summary)
+    return word_frequencies, 
 preprocessing(text)                        
