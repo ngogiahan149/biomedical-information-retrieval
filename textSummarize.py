@@ -3,7 +3,7 @@ import nltk, re, heapq, string
 from nltk.tokenize import sent_tokenize
  
 #nltk.download('stopwords')
-text = "In late, summer 1945. I, was a child. Hi; I can't. I'm"
+text = "In late, summer 1945. i, was you and me a child. Hi; I can't. I'm"
 def count_sentences_xml(rows):
 
     for i, (PMID, 
@@ -37,6 +37,7 @@ def preprocessing(text):
     stopwords = nltk.corpus.stopwords.words('english')
     #Find word scores
     word_frequencies = {}
+    print(stopwords)
     for word in nltk.word_tokenize(formatted_article_text):
         if word not in stopwords:
             if word not in word_frequencies.keys():
