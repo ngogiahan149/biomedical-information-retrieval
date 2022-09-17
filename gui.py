@@ -205,6 +205,7 @@ class mainWindow():
             font=("RobotoRoman Regular", 14 * -1)
         )
         window.resizable(True, True)
+       
         window.mainloop()
 
 mainWindow = mainWindow()

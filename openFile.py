@@ -37,7 +37,7 @@ def open_json():
     return data
 def parse_xml():
     # filename = open_xml()
-    tree = ET.parse(r'D:\NCKU\Biomedical Information Retrieval\HW1\Data\test1.xml')
+    tree = ET.parse(r'D:\NCKU\Biomedical Information Retrieval\HW1\Data\test3 - Copy.xml')
 
     root = tree.getroot()
     cols = ["PMID", "Journal ISSN",  "Journal Title", "ISO Abbreviation", 
@@ -142,6 +142,11 @@ def display_xml(frame, canvas):
                 Label(frame, text=(' '.join([item.text for item in AbstractList])), wraplength=1050,font=("RobotoRoman Regular", 10), anchor = 'w', justify= LEFT).pack(side='top', fill='x')
                 Label(frame, text="Keywords", wraplength=1050,font=("RobotoRoman Regular", 10, 'bold'), anchor = 'w', justify= LEFT).pack(side='top', pady = 15)
                 Label(frame, text=('; '.join([item.text for item in KeywordList])), wraplength=1050,font=("RobotoRoman Regular", 10), anchor = 'w', justify= LEFT).pack(side='top')
+    journalTitleNumOfWord = len(JournalTitle.split(' '))
+    journalTitleNumOfSentence = len(JournalTitle.split('.'))
+    journalTitleNumOfChar = len(JournalTitle)
+    
+    print(journalTitleNumOfChar, journalTitleNumOfSentence, journalTitleNumOfWord)
     # Number of sentences
     canvas.create_text(
         33,
