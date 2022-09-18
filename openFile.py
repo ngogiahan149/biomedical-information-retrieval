@@ -74,7 +74,7 @@ def parse_xml():
             ISOAbbreviation,
             ArticleTitle,
             Language,
-         AbstractList,
+            AbstractList,
             AuthorList,
             KeywordList,
             PublicationTypeList,
@@ -138,15 +138,13 @@ def display_xml(frame, canvas):
                 Label(frame, text=ArticleTitle, wraplength=1050, font=("RobotoRoman Bold", 12, 'bold')).pack(side='top', fill='x')
                 Label(frame, text=(', '.join(['{0} {1}'.format(item.findall('ForeName')[0].text, item.findall('LastName')[0].text) for item in AuthorList])), wraplength=1050, font=("RobotoRoman Regular", 10, 'italic')).pack(side='top', fill='x')
                 Label(frame, text=(''.join('{0} {1} {2} {3}'.format("PMID: ", PMID, "       ISO Abbreviation: ", ISOAbbreviation)) ), wraplength=1050, font=("RobotoRoman Regular", 8), anchor = 'w', justify = LEFT).pack(side='top', fill='x')
+                Label(frame, text=(''.join('{0} {1}'.format("Country: ", JournalCountry))), wraplength=1050,font=("RobotoRoman Regular", 8), anchor = 'w', justify= LEFT).pack(side='top', fill = 'x')
                 Label(frame, text='ABSTRACT', wraplength=1050, font=("RobotoRoman Bold", 10, 'bold')).pack(side='top', fill='x')
                 Label(frame, text=(' '.join([item.text for item in AbstractList])), wraplength=1050,font=("RobotoRoman Regular", 10), anchor = 'w', justify= LEFT).pack(side='top', fill='x')
-                Label(frame, text="Keywords", wraplength=1050,font=("RobotoRoman Regular", 10, 'bold'), anchor = 'w', justify= LEFT).pack(side='top', pady = 15)
-                Label(frame, text=('; '.join([item.text for item in KeywordList])), wraplength=1050,font=("RobotoRoman Regular", 10), anchor = 'w', justify= LEFT).pack(side='top')
-    journalTitleNumOfWord = len(JournalTitle.split(' '))
-    journalTitleNumOfSentence = len(JournalTitle.split('.'))
-    journalTitleNumOfChar = len(JournalTitle)
-    
-    print(journalTitleNumOfChar, journalTitleNumOfSentence, journalTitleNumOfWord)
+                Label(frame, text=(''.join('{0} {1}'.format("Keywords: ", ', '.join([item.text for item in KeywordList])))), wraplength=1050,font=("RobotoRoman Regular", 10), anchor = 'w', justify= LEFT).pack(side='top', fill = 'x')
+                
+    journalTitleCharNum, journalTitleWordNum, journalTitleSentenceNum = summarize(JournalTitle)
+    print(journalTitleCharNum, journalTitleWordNum, journalTitleSentenceNum)
     # Number of sentences
     canvas.create_text(
         33,
