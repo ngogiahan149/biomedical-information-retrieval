@@ -47,7 +47,7 @@ class mainWindow():
             outline="")
         # Rectangle for file content
        
-        frame = Frame(canvas, width = 1000, height = 700)
+        frame = Frame(canvas, width = 1000, height = 700, background = "white")
         frame.place(
             x = 191.0,
             y = 68.0,

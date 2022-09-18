@@ -77,4 +77,4 @@ def summarize(string):
     summary_sentences = heapq.nlargest(7, sentence_scores, key=sentence_scores.get)
     summary = ' '.join(summary_sentences)
     
-    return charNum, sentenceNum, wordNum
+    return charNum, wordNum, sentenceNum, 
