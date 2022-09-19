@@ -17,8 +17,6 @@ import spacy
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
 
-counter_content = True
-
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
@@ -59,12 +57,6 @@ class mainWindow():
 
         global counter_content
         # ADDING A SCROLLBAR
-        if counter_content == True:
-            width_content = 999
-            counter_content = FALSE
-        else:
-            width_content = 1000
-            counter_content = True
         for widget in frame.winfo_children():
             widget.destroy()
 
@@ -72,7 +64,7 @@ class mainWindow():
             frame,
             bg="#FFF5E4",
             height=600,
-            width=width_content,
+            width=1000,
             bd=0,
             highlightthickness=0,
             relief="ridge"
