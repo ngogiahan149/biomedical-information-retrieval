@@ -17,6 +17,7 @@ import spacy
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
 
+counter_content = True
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
@@ -54,7 +55,38 @@ class mainWindow():
         frame.place(
             x = 191.0,
             y = 68.0,
-        )       
+        )
+
+        global counter_content
+        # ADDING A SCROLLBAR
+        if counter_content == True:
+            width_content = 999
+            counter_content = FALSE
+        else:
+            width_content = 1000
+            counter_content = True
+        for widget in frame.winfo_children():
+            widget.destroy()
+
+        mycanvas = Canvas(
+            frame,
+            bg="#FFF5E4",
+            height=600,
+            width=width_content,
+            bd=0,
+            highlightthickness=0,
+            relief="ridge"
+        )
+        mycanvas.pack(side="left", fill="both", expand=True)
+        myscrollbar = Scrollbar(frame, orient="vertical", command=mycanvas.yview)
+        myscrollbar.pack(side="right", fill="y")
+
+        mycanvas.configure(yscrollcommand=myscrollbar.set)
+        mycanvas.bind('<Configure>', lambda e: mycanvas.configure(scrollregion=(0,0,2000,2000)))
+
+        second_frame = Frame(mycanvas)
+        mycanvas.create_window((0, 0), window=second_frame, anchor="nw")
+
         # canvas.create_window(0, 0, window = frame)
         # scroll_canvas = Canvas(frame)
         # scroll_frame = Frame(scroll_canvas, width = 950, height = 700)
@@ -82,7 +114,7 @@ class mainWindow():
             image=button_image_1,
             borderwidth=0,
             highlightthickness=0,
-            command = lambda: display_xml(frame, canvas),
+            command = lambda: display_xml(second_frame, mycanvas),
             relief="flat"
         )
         button_1.place(
@@ -98,7 +130,7 @@ class mainWindow():
             image=button_image_2,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: display_json(frame),
+            command=lambda: display_json(second_frame),
             relief="flat"
         )
         button_2.place(
@@ -151,7 +183,7 @@ class mainWindow():
             background = '#850E35',
             fg = 'white',
             font = ('RobotoRoman Regular', 8, 'bold'),
-            command = lambda: searchFunc(frame, entry_1.get()),
+            command = lambda: searchFunc(second_frame, entry_1.get()),
         )
         button_simpleSearch.place(
             x=550.0,
@@ -171,7 +203,7 @@ class mainWindow():
             background = '#850E35',
             fg = 'white',
             font = ('RobotoRoman Regular', 8, 'bold'),
-            command = lambda: advancedSearch(frame, entry_1.get(), nlp),
+            command = lambda: advancedSearch(second_frame, entry_1.get(), nlp),
         )
         button_advancedSearch.place(
             x=650.0,
