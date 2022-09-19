@@ -94,6 +94,7 @@ def parse_xml():
 def display_xml(frame, canvas):
     global counter_content
 
+    # ADDING A SCROLLBAR
     if (counter_content == True):
         width_content = 999
         counter_content = FALSE
@@ -113,7 +114,6 @@ def display_xml(frame, canvas):
         relief="ridge"
     )
     mycanvas.pack(side="left", fill="both", expand=True)
-    # ADDING A SCROLLBAR
     myscrollbar = Scrollbar(frame, orient="vertical", command=mycanvas.yview)
     myscrollbar.pack(side="right", fill="y")
 
