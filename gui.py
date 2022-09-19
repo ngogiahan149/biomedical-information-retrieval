@@ -74,7 +74,7 @@ class mainWindow():
         myscrollbar.pack(side="right", fill="y")
 
         mycanvas.configure(yscrollcommand=myscrollbar.set)
-        mycanvas.bind('<Configure>', lambda e: mycanvas.configure(scrollregion=(0,0,2000,2000)))
+        mycanvas.bind('<Configure>', lambda e: mycanvas.configure(scrollregion=(0,0,5000,5000)))
 
         second_frame = Frame(mycanvas)
         mycanvas.create_window((0, 0), window=second_frame, anchor="nw")

@@ -321,7 +321,7 @@ def display_json(frame):
     
 def CreateTextbox(parentWid, iWidth, textString, justify):
     lineCount = int(math.ceil(len(textString)/iWidth))
-    newtextbox = Text(parentWid, height = lineCount, width=iWidth - 15, wrap = WORD, bg ='white', bd =0, padx = 15)
+    newtextbox = Text(parentWid, height = lineCount, width=iWidth - 30, wrap = WORD, bg ='white', bd =0, padx = 15)
     newtextbox.tag_configure("tag_name", justify=justify)
     newtextbox.insert(INSERT, textString)
     newtextbox.tag_add("tag_name", "1.0", "end")
