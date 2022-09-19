@@ -9,6 +9,7 @@ from pathlib import Path
 # Explicit imports to satisfy Flake8
 from tkinter import *
 from tkinter import ttk
+from search import searchFunc, simpleSearch
 from openFile import *
 from textSummarize import *
 OUTPUT_PATH = Path(__file__).parent
@@ -95,7 +96,7 @@ class mainWindow():
             image=button_image_2,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: display_json(frame, canvas),
+            command=lambda: display_json(frame),
             relief="flat"
         )
         button_2.place(
@@ -132,7 +133,27 @@ class mainWindow():
             width=245.0,
             height=20.0
         )
-
+        button_search = Button(
+            borderwidth=0,
+            highlightthickness=0,
+            text = "Simple Search",
+            activebackground = '#4F0B21',
+            activeforeground = 'white',
+            relief="flat",
+            background = '#850E35',
+            fg = 'white',
+            font = ('RobotoRoman Regular', 8, 'bold'),
+            command = lambda: searchFunc(frame, entry_1),
+        )
+        button_search.place(
+            x=550.0,
+            y=25.0,
+            width=99.0,
+            height=32.0
+        )
+        
+        
+        button_search.config(command = searchFunc(frame, entry_1))
         image_image_1 = PhotoImage(
             file=relative_to_assets("image_1.png"))
         image_1 = canvas.create_image(
@@ -160,50 +181,50 @@ class mainWindow():
             
         # )
 
-        canvas.create_text(
-            33,
-            420.0,
-            anchor="nw",
-            text="Sentences",
-            fill="#000000",
-            font=("RobotoRoman Regular", 14 * -1)
-        )
+        # canvas.create_text(
+        #     33,
+        #     420.0,
+        #     anchor="nw",
+        #     text="Sentences",
+        #     fill="#000000",
+        #     font=("RobotoRoman Regular", 14 * -1)
+        # )
 
-        canvas.create_text(
-            33,
-            370.0,
-            anchor="nw",
-            text="980",
-            fill="#EE6983",
-            font=("RobotoCondensed Bold", 30 * -1)
-        )
+        # canvas.create_text(
+        #     33,
+        #     370.0,
+        #     anchor="nw",
+        #     text="980",
+        #     fill="#EE6983",
+        #     font=("RobotoCondensed Bold", 30 * -1)
+        # )
 
-        canvas.create_text(
-            33,
-            350,
-            anchor="nw",
-            text="Words",
-            fill="#000000",
-            font=("RobotoRoman Regular", 14 * -1)
-        )
+        # canvas.create_text(
+        #     33,
+        #     350,
+        #     anchor="nw",
+        #     text="Words",
+        #     fill="#000000",
+        #     font=("RobotoRoman Regular", 14 * -1)
+        # )
 
-        canvas.create_text(
-            33,
-            300.0,
-            anchor="nw",
-            text="1090",
-            fill="#EE6983",
-            font=("RobotoCondensed Bold", 30 * -1)
-        )
+        # canvas.create_text(
+        #     33,
+        #     300.0,
+        #     anchor="nw",
+        #     text="1090",
+        #     fill="#EE6983",
+        #     font=("RobotoCondensed Bold", 30 * -1)
+        # )
 
-        canvas.create_text(
-            33,
-            280.0,
-            anchor="nw",
-            text="Characters",
-            fill="#000000",
-            font=("RobotoRoman Regular", 14 * -1)
-        )
+        # canvas.create_text(
+        #     33,
+        #     280.0,
+        #     anchor="nw",
+        #     text="Characters",
+        #     fill="#000000",
+        #     font=("RobotoRoman Regular", 14 * -1)
+        # )
         window.resizable(True, True)
        
         window.mainloop()

@@ -1,6 +1,5 @@
-from nltk.tokenize import RegexpTokenizer
-tokenizer = RegexpTokenizer(r'\w+')
-text = "This is my can't text. It icludes commas, question marks? and other stuff. Also ."
-tokens = tokenizer.tokenize(text)
-print(tokens)
-print(len(tokens))
+from tkinter import * 
+root = Tk()
+text = Text(root)
+text.insert("abc")
+print(text.winfo_class())

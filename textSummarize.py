@@ -41,7 +41,7 @@ def summarize(string):
     #Find word scores
     word_frequencies = {}
     for word in nltk.word_tokenize(formatted_article_text):
-        if word not in stopwords:
+        if word.lower() not in stopwords:
             if word not in word_frequencies.keys():
                 word_frequencies[word] = 1
             else:
@@ -54,11 +54,11 @@ def summarize(string):
     tokens = tokenizer.tokenize(text)
     wordNum = len(tokens)
 
-    #Find weighted frequency
-    maximum_frequncy = max(word_frequencies.values())
-    word_weighted = {}
-    for word in word_frequencies.keys():
-        word_weighted[word] = (word_frequencies[word]/maximum_frequncy)
+    # #Find weighted frequency
+    # maximum_frequncy = max(word_frequencies.values())
+    # word_weighted = {}
+    # for word in word_frequencies.keys():
+    #     word_weighted[word] = (word_frequencies[word]/maximum_frequncy)
     
     #Find total sentence
     sentenceNum = len(sentence_list)
@@ -73,8 +73,11 @@ def summarize(string):
                         sentence_scores[sent] = word_frequencies[word]
                     else:
                         sentence_scores[sent] += word_frequencies[word]
+    
     # print("Total sentences", sum(len(sent for sent in sentence_scores)))
-    summary_sentences = heapq.nlargest(7, sentence_scores, key=sentence_scores.get)
+    #Select just 30% for summary
+    select_length = int(len(sentence_scores)*0.3) 
+    summary_sentences = heapq.nlargest(select_length, sentence_scores, key=sentence_scores.get)
     summary = ' '.join(summary_sentences)
     
-    return charNum, wordNum, sentenceNum, 
+    return charNum, wordNum, sentenceNum, summary

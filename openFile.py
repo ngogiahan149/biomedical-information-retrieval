@@ -5,7 +5,7 @@ import xml.etree.ElementTree as ET
 import pandas as pd
 import json
 from textSummarize import *
-
+import math
 def open_xml():
     filetypes = (
         ('xml files', '*.xml'),
@@ -26,18 +26,10 @@ def open_json():
         title='Choose a json file',
         initialdir='/',
         filetypes=filetypes)
-    #Choose JSON file
-    fileName = open_json()  
-
-    #Open JSON file
-    f = open(fileName, encoding="utf8")    
-
-    #Return JSON file as a dictionary
-    data = json.load(f)     
-    return data
+    return fileName
 def parse_xml():
-    # filename = open_xml()
-    tree = ET.parse(r'D:\NCKU\Biomedical Information Retrieval\HW1\Data\test3 - Copy.xml')
+    filename = open_xml()
+    tree = ET.parse(filename)
 
     root = tree.getroot()
     cols = ["PMID", "Journal ISSN",  "Journal Title", "ISO Abbreviation", 
@@ -97,12 +89,7 @@ def display_xml(frame, canvas):
     
 
     
-    # # set column headings
-    # for col in cols:
-    #     listBox.column(col, anchor = CENTER, stretch= YES)
-    #     listBox.heading(col, text=col)    
     
-
     # #insert data to rows in table
     # for i, (PMID, 
     #         JournalISSN,
@@ -135,39 +122,111 @@ def display_xml(frame, canvas):
             PublicationTypeList,
             JournalCountry,
             ) in enumerate(rows, start = 1):
-                Label(frame, text=ArticleTitle, wraplength=1050, font=("RobotoCondensed Bold", 12, 'bold'), background = 'white').pack(side='top', fill='x')
-                Label(frame, text=(', '.join(['{0} {1}'.format(item.findall('ForeName')[0].text, item.findall('LastName')[0].text) for item in AuthorList])), background = 'white', wraplength=1050, font=("RobotoRoman Regular", 10, 'italic')).pack(side='top', fill='x')
-                Label(frame, text=(''.join('{0} {1} {2} {3}'.format("PMID: ", PMID, "       ISO Abbreviation: ", ISOAbbreviation)) ), background = 'white', wraplength=1050, font=("RobotoRoman Regular", 8), anchor = 'w', justify = LEFT).pack(side='top', fill='x')
-                Label(frame, text=(''.join('{0} {1}'.format("Country: ", JournalCountry))), wraplength=1050,font=("RobotoRoman Regular", 8), background = 'white', anchor = 'w', justify= LEFT).pack(side='top', fill = 'x')
-                Label(frame, text='ABSTRACT', wraplength=1050, font=("RobotoCondensed Bold", 10, 'bold'), background = 'white').pack(side='top', fill='x')
-                Label(frame, text=(' '.join([item.text for item in AbstractList])), wraplength=1050,font=("RobotoRoman Regular", 10), background = 'white', anchor = 'w', justify= LEFT).pack(side='top', fill='x')
-                Label(frame, text=(''.join('{} {}'.format("Keywords: ", ', '.join([item.text for item in KeywordList])))), wraplength=1050,font=("RobotoRoman Regular", 10), background = 'white', anchor = 'w', justify= LEFT).pack(side='top', fill = 'x')
+                # Label(frame, text=ArticleTitle, wraplength=1050, font=("RobotoCondensed Bold", 12, 'bold'), background = 'white').pack(side='top', fill='x')
+                # Label(frame, text=(', '.join(['{0} {1}'.format(item.findall('ForeName')[0].text, item.findall('LastName')[0].text) for item in AuthorList])), background = 'white', wraplength=1050, font=("RobotoRoman Regular", 10, 'italic')).pack(side='top', fill='x')
+                # Label(frame, text=(''.join('{0} {1} {2} {3}'.format("PMID: ", PMID, "       ISO Abbreviation: ", ISOAbbreviation)) ), background = 'white', wraplength=1050, font=("RobotoRoman Regular", 8), anchor = 'w', justify = LEFT).pack(side='top', fill='x')
+                # Label(frame, text=(''.join('{0} {1}'.format("Country: ", JournalCountry))), wraplength=1050,font=("RobotoRoman Regular", 8), background = 'white', anchor = 'w', justify= LEFT).pack(side='top', fill = 'x')
+                # Label(frame, text='ABSTRACT', wraplength=1050, font=("RobotoCondensed Bold", 10, 'bold'), background = 'white').pack(side='top', fill='x')
+                # Label(frame, text=(' '.join([item.text for item in AbstractList])), wraplength=1050,font=("RobotoRoman Regular", 10), background = 'white', anchor = 'w', justify= LEFT).pack(side='top', fill='x')
+                # Label(frame, text=(''.join('{} {}'.format("Keywords: ", ', '.join([item.text for item in KeywordList])))), wraplength=1050,font=("RobotoRoman Regular", 10), background = 'white', anchor = 'w', justify= LEFT).pack(side='top', fill = 'x')
                 
+                #Create Journal title
+                journalTitleText = CreateTextbox(frame, 130, JournalTitle, 'center')
+                journalTitleText.pack()
+                journalTitleText.configure(font=("RobotoCondensed Bold", 12, 'underline bold'), background = 'white')
+                
+                #Create Article title
+                articleTitleText = CreateTextbox(frame, 130, ArticleTitle, 'center')
+                articleTitleText.pack()
+                articleTitleText.configure(font=("RobotoCondensed Bold", 12, 'bold'), background = 'white')
+
+                #Create Author
+                authorName = ', '.join(['{0} {1}'.format(item.findall('ForeName')[0].text, item.findall('LastName')[0].text) for item in AuthorList])
+                authorText = CreateTextbox(frame, 130, authorName, 'center')
+                authorText.pack(fill='x')
+                authorText.configure(font=("RobotoRoman Regular", 10, 'italic'), background = 'white')
+
+                #Create PMID, ISO
+                PMID = (''.join('{0} {1} {2} {3}'.format("PMID: ", PMID, "       ISO Abbreviation: ", ISOAbbreviation)) )
+                pmidText = CreateTextbox(frame, 130, PMID, 'left')
+                pmidText.pack(fill='x')
+                pmidText.configure(font=("RobotoRoman Regular", 8), background = 'white')
+
+                #Create Journal Country
+                countryText = CreateTextbox(frame, 130, JournalCountry, 'left')
+                countryText.pack(fill='x')
+                countryText.configure(font=("RobotoRoman Regular", 8), background = 'white')
+
+
+                #Create Abstract
+                Label(frame, text='ABSTRACT', wraplength=1050, font=("RobotoCondensed Bold", 10, 'bold'), background = 'white').pack(side='top', fill='x')    
+                abstractContent= (' '.join([item.text for item in AbstractList]))
+                abstractText = CreateTextbox(frame, 130, abstractContent, 'left')
+                abstractText.pack(fill='x')
+                abstractText.configure(font=("RobotoRoman Regular", 10), background = 'white')
+
+                #Create Keyword
+                keyword = (''.join('{} {}'.format("Keywords: ", ', '.join([item.text for item in KeywordList]))))
+                keywordText = CreateTextbox(frame, 130, keyword, 'left')
+                keywordText.pack(fill='x')
+                keywordText.configure(font=("RobotoRoman Regular", 10), background = 'white')
+
                 # Table of character, word, sentence count
-                analysisFrame = LabelFrame(frame,  background='#EE6983', foreground ='white')
-                analysisFrame.pack(fill="y", expand="yes", pady = 10, anchor = 's')
-                articleTitleNumOfChar, articleTitleNumOfWord, articleTitleNumOfSentence = summarize(ArticleTitle)
-                abstractNumOfChar,abstractNumOfWord,abstractNumOfSentence = summarize(' '.join([item.text for item in AbstractList]))
-                keywordNumOfChar, keywordNumOfWord, keywordNumOfSentence = summarize(' '.join([item.text for item in KeywordList]))
+                analysisFrame = LabelFrame(frame,  background='#850E35', foreground ='white')
+                analysisFrame.pack(fill="both", expand="yes", pady = 10)
+                
+                journalTitleNumOfChar, journalTitleNumOfWord, journalTitleNumOfSentence, journalTitleSummary = summarize(JournalTitle)
+                articleTitleNumOfChar, articleTitleNumOfWord, articleTitleNumOfSentence, articleTitleSummary = summarize(ArticleTitle)
+                abstractNumOfChar,abstractNumOfWord,abstractNumOfSentence, abstractSummary = summarize(' '.join([item.text for item in AbstractList]))
+                keywordNumOfChar, keywordNumOfWord, keywordNumOfSentence, keywordSummary = summarize(' '.join([item.text for item in KeywordList]))
                 authorNum = len(AuthorList)
-                ttk.Label(analysisFrame, text = ('Num of'),background='#EE6983', foreground ='white', font=("RobotoRoman Bold", 10, 'bold'), anchor = 'w', justify=LEFT).grid(row=0, column=0, padx = 2, pady =5)
-                ttk.Label(analysisFrame, text = ('Characters'),background='#EE6983', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=0, column=1, padx =2, pady =5)
-                ttk.Label(analysisFrame, text = ('Words'),background='#EE6983', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=0, column=2, padx =2, pady =5)
-                ttk.Label(analysisFrame, text = ('Sentences'),background='#EE6983', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=0, column=3, padx =2, pady =5)
-                ttk.Label(analysisFrame, text = 'Artile Title:', background='#EE6983', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=1, column=0, padx =5, pady =5)
-                ttk.Label(analysisFrame, text = articleTitleNumOfChar,background='#EE6983', foreground ='white', font=("RobotoCondensed Bold", 11, 'bold')).grid(row=1, column=1, padx =2, pady =5)
-                ttk.Label(analysisFrame, text = articleTitleNumOfWord,background='#EE6983', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=1, column=2, padx =2, pady =5)
-                ttk.Label(analysisFrame, text = articleTitleNumOfSentence,background='#EE6983', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=1, column=3, padx =2, pady =5)
-                ttk.Label(analysisFrame, text = 'Abstract:', background='#EE6983', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=2, column=0, padx =5, pady =5)
-                ttk.Label(analysisFrame, text = abstractNumOfChar,background='#EE6983', foreground ='white', font=("RobotoCondensed Bold", 11, 'bold')).grid(row=2, column=1, padx =2, pady =5)
-                ttk.Label(analysisFrame, text = abstractNumOfWord,background='#EE6983', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=2, column=2, padx =2, pady =5)
-                ttk.Label(analysisFrame, text = abstractNumOfSentence,background='#EE6983', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=2, column=3, padx =2, pady =5)
-                ttk.Label(analysisFrame, text = 'Keyword:', background='#EE6983', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=3, column=0, padx =5, pady =5)
-                ttk.Label(analysisFrame, text = keywordNumOfChar,background='#EE6983', foreground ='white', font=("RobotoCondensed Bold", 11, 'bold')).grid(row=3, column=1, padx =2, pady =5)
-                ttk.Label(analysisFrame, text = keywordNumOfWord,background='#EE6983', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=3, column=2, padx =2, pady =5)
-                ttk.Label(analysisFrame, text = keywordNumOfSentence,background='#EE6983', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=3, column=3, padx =2, pady =5)
-                ttk.Label(analysisFrame, text = 'Author:', background='#EE6983', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=4, column=0, padx =5, pady =5)
-                ttk.Label(analysisFrame, text = '{} authors'.format(authorNum),background='#EE6983', foreground ='white', font=("RobotoCondensed Bold", 11, 'bold')).grid(row=4, column=1, padx =2, pady =5, columnspan = 3)
+
+                #Total analysis
+                total = ''.join('{} {} {} {}.'.format(JournalTitle, ArticleTitle, abstractContent, keyword))
+                totalNumOfChar, totalNumOfWord, totalNumOfSentence, totalSummary = summarize(total)
+
+                ttk.Label(analysisFrame, text = ('Num of'),background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold'), anchor = 'w', justify=LEFT).grid(row=0, column=0, padx = 2, pady =5)
+                ttk.Label(analysisFrame, text = ('Characters'),background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=0, column=1, padx =2, pady =5)
+                ttk.Label(analysisFrame, text = ('Words'),background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=0, column=2, padx =2, pady =5)
+                ttk.Label(analysisFrame, text = ('Sentences'),background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=0, column=3, padx =2, pady =5)
+                ttk.Label(analysisFrame, text = ('Summary'),background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=0, column=4, padx =2, pady =5, columnspan= 4)
+                
+                #Journal title analysis
+                ttk.Label(analysisFrame, text = 'Journal Title:', background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=1, column=0, padx =5, pady =5)
+                ttk.Label(analysisFrame, text = journalTitleNumOfChar, background='#850E35', foreground ='white', font=("RobotoCondensed Bold", 11, 'bold')).grid(row=1, column=1, padx =2, pady =5)
+                ttk.Label(analysisFrame, text = journalTitleNumOfWord, background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=1, column=2, padx =2, pady =5)
+                ttk.Label(analysisFrame, text = journalTitleNumOfSentence, background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=1, column=3, padx =2, pady =5)
+                
+                #Article title analysis
+                ttk.Label(analysisFrame, text = 'Artile Title:', background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=2, column=0, padx =5, pady =5)
+                ttk.Label(analysisFrame, text = articleTitleNumOfChar,background='#850E35', foreground ='white', font=("RobotoCondensed Bold", 11, 'bold')).grid(row=2, column=1, padx =2, pady =5)
+                ttk.Label(analysisFrame, text = articleTitleNumOfWord,background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=2, column=2, padx =2, pady =5)
+                ttk.Label(analysisFrame, text = articleTitleNumOfSentence,background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=2, column=3, padx =2, pady =5)
+                
+                #Abstract analysis
+                ttk.Label(analysisFrame, text = 'Abstract:', background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=3, column=0, padx =5, pady =5)
+                ttk.Label(analysisFrame, text = abstractNumOfChar,background='#850E35', foreground ='white', font=("RobotoCondensed Bold", 11, 'bold')).grid(row=3, column=1, padx =2, pady =5)
+                ttk.Label(analysisFrame, text = abstractNumOfWord,background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=3, column=2, padx =2, pady =5)
+                ttk.Label(analysisFrame, text = abstractNumOfSentence,background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=3, column=3, padx =2, pady =5)
+                
+                #Keyword analysis
+                ttk.Label(analysisFrame, text = 'Keyword:', background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=4, column=0, padx =5, pady =5)
+                ttk.Label(analysisFrame, text = keywordNumOfChar,background='#850E35', foreground ='white', font=("RobotoCondensed Bold", 11, 'bold')).grid(row=4, column=1, padx =2, pady =5)
+                ttk.Label(analysisFrame, text = keywordNumOfWord,background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=4, column=2, padx =2, pady =5)
+                ttk.Label(analysisFrame, text = keywordNumOfSentence,background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=4, column=3, padx =2, pady =5)
+                
+                #Author analysis
+                ttk.Label(analysisFrame, text = 'Author:', background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=5, column=0, padx =5, pady =5)
+                ttk.Label(analysisFrame, text = '{} authors'.format(authorNum),background='#850E35', foreground ='white', font=("RobotoCondensed Bold", 11, 'bold')).grid(row=5, column=1, padx =2, pady =5, columnspan = 3)
+                
+                # #Total analysis
+                # ttk.Label(analysisFrame, text = 'Total', background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=6, column=0, padx =5, pady =5)
+                # ttk.Label(analysisFrame, text = totalNumOfChar,background='#850E35', foreground ='white', font=("RobotoCondensed Bold", 11, 'bold')).grid(row=6, column=1, padx =2, pady =5)
+                # ttk.Label(analysisFrame, text = totalNumOfWord,background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=6, column=2, padx =2, pady =5)
+                # ttk.Label(analysisFrame, text = totalNumOfSentence,background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=6, column=3, padx =2, pady =5)
+                
+                #Summary content
+                ttk.Label(analysisFrame, text = totalSummary,  wraplength=700,background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=1, column=4, padx =5, pady =5, columnspan = 1, rowspan=5)
     
     # ttk.Label(analysisFrame, text = 'Article Title:', background='#454545', foreground ='white', font=("Courier", 10, 'underline italic')).grid(row=0, column=2, padx =5, pady =5)
     # ttk.Label(analysisFrame, text = '{} chars, {} words, {} sentences'.format(articleTitleNumOfChar,articleTitleNumOfWord,articleTitleNumOfSentence),background='#454545', foreground ='white').grid(row=0, column=3, padx =2, pady =5)
@@ -177,53 +236,111 @@ def display_xml(frame, canvas):
     
     # ttk.Label(analysisFrame, text = 'Author:', background='#454545', foreground ='white', font=("Courier", 10, 'underline italic')).grid(row=0, column=6, padx =5, pady =5)
     # ttk.Label(analysisFrame, text = len(AuthorList),background='#454545', foreground ='white').grid(row=0, column=7, padx =2, pady =5)
-             
-    # Number of sentences
-    canvas.create_text(
-        33,
-        440.0,
-        anchor="nw",
-        text= count_sentences_xml(rows),
-        fill="#EE6983",
-        font=("RobotoCondensed Bold", 30 * -1),
-        
-    )
     
-def display_json(frame, canvas):
-    data = open_json() 
+def display_json(frame):
+    fileName = open_json()     
+     #Open JSON file
+    f = open(fileName.name, 'r', encoding="utf8")    
 
-     #Create rows and columns for adding data
-    cols = ["PMID", "Title",  "Authors", "Citation", 
-    "Journal/Book", "Publication Year", "Create Date"]
-    rows = []
-
-    #Create scroll bar
-    listBox = ttk.Treeview(frame, columns=cols, show='headings', selectmode = 'browse')
-    listBox.place(relx=0.01, rely=0.01, relwidth = 1, relheight = 1)
-    
-    vsb = Scrollbar(frame, orient="vertical", command=listBox.yview)
-    vsb.place(relx=0.98, rely=0.006, relheight=1, width=100)
-
-    hsb = Scrollbar(frame, orient="horizontal", command=listBox.xview)
-    hsb.place(relx=0.005, rely=0.95, height=400, width=500)
-
-    listBox.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
-
-    # set column headings
-    for col in cols:
-        listBox.column(col, anchor = CENTER, stretch= YES)
-        listBox.heading(col, text=col)    
-    
-
-    #insert data to rows in table
+    #Return JSON file as a dictionary
+    data = json.load(f)     
     for item in data:
-        listBox.insert("", "end", values=(
-            item['PMID'], 
-            item['Title'],
-            item['Authors'],
-            item['Citation'],
-            item['Journal/Book'],
-            item['Publication Year'],
-            item['Create Date'],))
-     
-    return data
+        ArticleTitle = item['Title']
+        AuthorList = item['Authors']
+        AbstractList = item['Abstract']
+        print(ArticleTitle)
+        # pmid = item['PMID']
+        # doi = item['DOI']
+        # Citation = item['Citation']
+        # Journal_Book = item['Journal/Book']
+        # Publication_Year = item['Publication Year']
+        # Create_Date = item['Create Date']
+
+        #Create Article title
+        articleTitleText = CreateTextbox(frame, 130, ArticleTitle, 'center')
+        articleTitleText.pack()
+        articleTitleText.configure(font=("RobotoCondensed Bold", 12, 'bold'), background = 'white')
+
+        #Create Article title
+        authorText = CreateTextbox(frame, 130, AuthorList, 'center')
+        authorText.pack(fill='x')
+        authorText.configure(font=("RobotoRoman Regular", 10, 'italic'), background = 'white')
+
+        #Create Abstract
+        Label(frame, text='ABSTRACT', wraplength=1050, font=("RobotoCondensed Bold", 10, 'bold'), background = 'white').pack(side='top', fill='x')
+        abstractText = CreateTextbox(frame, 130, AbstractList, 'left')
+        abstractText.pack(fill='x')
+        abstractText.configure(font=("RobotoRoman Regular", 10), background = 'white')
+        
+        # Label(frame, text= AuthorList, background = 'white', wraplength=1050, font=("RobotoRoman Regular", 10, 'italic')).pack(side='top', fill='x')
+        # Label(frame, text=(''.join('{0} {1} {2} {3}'.format("PMID: ", pmid, "       DOI: ", doi)) ), background = 'white', wraplength=1050, font=("RobotoRoman Regular", 10), anchor = 'w', justify = LEFT).pack(side='top', fill='x')
+        # Label(frame, text=('Publication Year: {}'.format(Publication_Year)), wraplength=1050,font=("RobotoRoman Regular", 10), background = 'white', anchor = 'w', justify= LEFT).pack(side='top', fill = 'x')
+        # Label(frame, text=('Create Date: {}'.format(Create_Date)), wraplength=1050,font=("RobotoRoman Regular", 8), background = 'white', anchor = 'w', justify= LEFT).pack(side='top', fill = 'x')
+        # Label(frame, text='Citation', wraplength=1050, font=("RobotoCondensed Bold", 10, 'bold'), background = 'white').pack(side='top', fill='x')
+        # Label(frame, text= Citation, wraplength=1050,font=("RobotoRoman Regular", 10), background = 'white', anchor = 'w', justify= LEFT).pack(side='top', fill='x')
+        # # Label(frame, text=(''.join('{} {}'.format("Keywords: ", ', '.join([item.text for item in KeywordList])))), wraplength=1050,font=("RobotoRoman Regular", 10), background = 'white', anchor = 'w', justify= LEFT).pack(side='top', fill = 'x')
+        # Label(frame, text=('Journal/Book: {}'.format(Journal_Book)), wraplength=1050,font=("RobotoRoman Regular", 10), background = 'white', anchor = 'w', justify= LEFT).pack(side='top', fill = 'x')
+
+        # Table of character, word, sentence count
+        analysisFrame = LabelFrame(frame,  background='#850E35', foreground ='white')
+        analysisFrame.pack(fill="y", expand="yes", pady = 10, anchor = 's')
+        articleTitleNumOfChar, articleTitleNumOfWord, articleTitleNumOfSentence, articleTitleSummary = summarize(ArticleTitle)
+        abstractNumOfChar,abstractNumOfWord,abstractNumOfSentence, abstractSummary = summarize(AbstractList)
+        authorNum = len(AuthorList.split(','))
+
+        #Total analysis
+        total = ''.join('{}. {}'.format(ArticleTitle, AbstractList))
+        print(total)
+        totalNumOfChar, totalNumOfWord, totalNumOfSentence, totalSummary = summarize(total)
+
+        #Column name
+        ttk.Label(analysisFrame, text = ('Num of'),background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold'), anchor = 'w', justify=LEFT).grid(row=0, column=0, padx = 2, pady =5)
+        ttk.Label(analysisFrame, text = ('Characters'),background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=0, column=1, padx =2, pady =5)
+        ttk.Label(analysisFrame, text = ('Words'),background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=0, column=2, padx =2, pady =5)
+        ttk.Label(analysisFrame, text = ('Sentences'),background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=0, column=3, padx =2, pady =5)
+        ttk.Label(analysisFrame, text = ('Summary'),background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=0, column=4, padx =2, pady =5, columnspan= 4)
+
+        #Article analysis
+        ttk.Label(analysisFrame, text = 'Artile Title:', background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=1, column=0, padx =5, pady =5)
+        ttk.Label(analysisFrame, text = articleTitleNumOfChar,background='#850E35', foreground ='white', font=("RobotoCondensed Bold", 11, 'bold')).grid(row=1, column=1, padx =2, pady =5)
+        ttk.Label(analysisFrame, text = articleTitleNumOfWord,background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=1, column=2, padx =2, pady =5)
+        ttk.Label(analysisFrame, text = articleTitleNumOfSentence,background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=1, column=3, padx =2, pady =5)
+        
+        #Abstract analysis
+        ttk.Label(analysisFrame, text = 'Abstract:', background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=2, column=0, padx =5, pady =5)
+        ttk.Label(analysisFrame, text = abstractNumOfChar,background='#850E35', foreground ='white', font=("RobotoCondensed Bold", 11, 'bold')).grid(row=2, column=1, padx =2, pady =5)
+        ttk.Label(analysisFrame, text = abstractNumOfWord,background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=2, column=2, padx =2, pady =5)
+        ttk.Label(analysisFrame, text = abstractNumOfSentence,background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=2, column=3, padx =2, pady =5)
+        # ttk.Label(analysisFrame, text = 'Keyword:', background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=3, column=0, padx =5, pady =5)
+        # ttk.Label(analysisFrame, text = keywordNumOfChar,background='#850E35', foreground ='white', font=("RobotoCondensed Bold", 11, 'bold')).grid(row=3, column=1, padx =2, pady =5)
+        # ttk.Label(analysisFrame, text = keywordNumOfWord,background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=3, column=2, padx =2, pady =5)
+        # ttk.Label(analysisFrame, text = keywordNumOfSentence,background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=3, column=3, padx =2, pady =5)
+        
+        #Author analysis
+        ttk.Label(analysisFrame, text = 'Author:', background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=3, column=0, padx =5, pady =5)
+        ttk.Label(analysisFrame, text = '{} authors'.format(authorNum),background='#850E35', foreground ='white', font=("RobotoCondensed Bold", 11, 'bold')).grid(row=3, column=1, padx =2, pady =5, columnspan = 3)
+        
+        #Summary content
+        ttk.Label(analysisFrame, text = totalSummary,  wraplength=700,background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=1, column=4, padx =5, pady =5, columnspan = 1, rowspan=5)
+    
+        separator = Frame(frame, bd=10, relief='sunken', height=4, bg = "#EE6983")
+        separator.pack(side='top', fill='x')
+
+    # #insert data to rows in table
+    # for item in data:
+    #     listBox.insert("", "end", values=(
+    #         item['PMID'], 
+    #         item['Title'],
+    #         item['Authors'],
+    #         item['Citation'],
+    #         item['Journal/Book'],
+    #         item['Publication Year'],
+    #         item['Create Date'],))
+def CreateTextbox(parentWid, iWidth, textString, justify):
+    lineCount = int(math.ceil(len(textString)/iWidth))
+    newtextbox = Text(parentWid, height = lineCount, width=iWidth - 15, wrap = WORD, bg ='white', bd =0, padx = 15)
+    newtextbox.tag_configure("tag_name", justify=justify)
+    newtextbox.insert(INSERT, textString)
+    newtextbox.tag_add("tag_name", "1.0", "end")
+    newtextbox.config(state=DISABLED)
+    return newtextbox
