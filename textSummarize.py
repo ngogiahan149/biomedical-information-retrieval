@@ -1,10 +1,9 @@
-from openFile import *
 import nltk, re, heapq, string
 from nltk.tokenize import sent_tokenize
 from collections import defaultdict
 from nltk.tokenize import RegexpTokenizer
 #nltk.download('stopwords')
-text = "in can't . i? ? in"
+
 def count_sentences_xml(rows):
 
     for i, (PMID, 
@@ -31,7 +30,7 @@ def preprocessing(text):
     # Removing special characters and digits
     formatted_article_text = re.sub('[^a-zA-Z]', ' ', text)
     formatted_article_text = re.sub(r'\s+', ' ', text)
-    return formatted_article_text, text
+    return formatted_article_text.lower(), text
 
 def summarize(string):
     formatted_article_text, text = preprocessing(string)
@@ -41,7 +40,7 @@ def summarize(string):
     #Find word scores
     word_frequencies = {}
     for word in nltk.word_tokenize(formatted_article_text):
-        if word.lower() not in stopwords:
+        if word not in stopwords:
             if word not in word_frequencies.keys():
                 word_frequencies[word] = 1
             else:
@@ -66,7 +65,7 @@ def summarize(string):
     #Find sentence scores
     sentence_scores = {}
     for sent in sentence_list:
-        for word in nltk.word_tokenize(sent.lower()):
+        for word in nltk.word_tokenize(sent):
             if word in word_frequencies.keys():
                 if len(sent.split(' ')) < 30:
                     if sent not in sentence_scores.keys():

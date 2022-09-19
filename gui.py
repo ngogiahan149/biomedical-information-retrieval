@@ -9,9 +9,11 @@ from pathlib import Path
 # Explicit imports to satisfy Flake8
 from tkinter import *
 from tkinter import ttk
-from search import searchFunc, simpleSearch
+from search import searchFunc, advancedSearch
 from openFile import *
 from textSummarize import *
+import spacy
+
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
 
@@ -133,7 +135,13 @@ class mainWindow():
             width=245.0,
             height=20.0
         )
-        button_search = Button(
+
+
+        #Create nlp
+        nlp = spacy.load('en_core_web_lg')
+
+        #Button simple search
+        button_simpleSearch = Button(
             borderwidth=0,
             highlightthickness=0,
             text = "Simple Search",
@@ -143,17 +151,37 @@ class mainWindow():
             background = '#850E35',
             fg = 'white',
             font = ('RobotoRoman Regular', 8, 'bold'),
-            command = lambda: searchFunc(frame, entry_1),
+            command = lambda: searchFunc(frame, entry_1.get()),
         )
-        button_search.place(
+        button_simpleSearch.place(
             x=550.0,
+            y=25.0,
+            width=99.0,
+            height=32.0
+        )
+        #button_simpleSearch.configure(command = searchFunc(frame, entry_1.get()))
+        #Button Advanced Search
+        button_advancedSearch = Button(
+            borderwidth=0,
+            highlightthickness=0,
+            text = "Advanced Search",
+            activebackground = '#4F0B21',
+            activeforeground = 'white',
+            relief="flat",
+            background = '#850E35',
+            fg = 'white',
+            font = ('RobotoRoman Regular', 8, 'bold'),
+            command = lambda: advancedSearch(frame, entry_1.get(), nlp),
+        )
+        button_advancedSearch.place(
+            x=650.0,
             y=25.0,
             width=99.0,
             height=32.0
         )
         
         
-        button_search.config(command = searchFunc(frame, entry_1))
+
         image_image_1 = PhotoImage(
             file=relative_to_assets("image_1.png"))
         image_1 = canvas.create_image(

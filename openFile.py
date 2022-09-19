@@ -4,7 +4,7 @@ from tkinter.messagebox import showinfo
 import xml.etree.ElementTree as ET
 import pandas as pd
 import json
-from textSummarize import *
+from textSummarize import summarize
 import math
 def open_xml():
     filetypes = (
@@ -228,14 +228,6 @@ def display_xml(frame, canvas):
                 #Summary content
                 ttk.Label(analysisFrame, text = totalSummary,  wraplength=700,background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=1, column=4, padx =5, pady =5, columnspan = 1, rowspan=5)
     
-    # ttk.Label(analysisFrame, text = 'Article Title:', background='#454545', foreground ='white', font=("Courier", 10, 'underline italic')).grid(row=0, column=2, padx =5, pady =5)
-    # ttk.Label(analysisFrame, text = '{} chars, {} words, {} sentences'.format(articleTitleNumOfChar,articleTitleNumOfWord,articleTitleNumOfSentence),background='#454545', foreground ='white').grid(row=0, column=3, padx =2, pady =5)
-    
-    # ttk.Label(analysisFrame, text = 'Abstract Text:', background='#454545', foreground ='white', font=("Courier", 10, 'underline italic')).grid(row=0, column=4, padx =5, pady =5)
-    # ttk.Label(analysisFrame, text = '{} chars, {} words, {} sentences'.format(abstractTextNumOfChar,abstractTextNumOfWord,abstractTextNumOfSentence),background='#454545', foreground ='white').grid(row=0, column=5, padx =2, pady =5)
-    
-    # ttk.Label(analysisFrame, text = 'Author:', background='#454545', foreground ='white', font=("Courier", 10, 'underline italic')).grid(row=0, column=6, padx =5, pady =5)
-    # ttk.Label(analysisFrame, text = len(AuthorList),background='#454545', foreground ='white').grid(row=0, column=7, padx =2, pady =5)
     
 def display_json(frame):
     fileName = open_json()     
@@ -248,7 +240,7 @@ def display_json(frame):
         ArticleTitle = item['Title']
         AuthorList = item['Authors']
         AbstractList = item['Abstract']
-        print(ArticleTitle)
+
         # pmid = item['PMID']
         # doi = item['DOI']
         # Citation = item['Citation']
@@ -326,16 +318,7 @@ def display_json(frame):
         separator = Frame(frame, bd=10, relief='sunken', height=4, bg = "#EE6983")
         separator.pack(side='top', fill='x')
 
-    # #insert data to rows in table
-    # for item in data:
-    #     listBox.insert("", "end", values=(
-    #         item['PMID'], 
-    #         item['Title'],
-    #         item['Authors'],
-    #         item['Citation'],
-    #         item['Journal/Book'],
-    #         item['Publication Year'],
-    #         item['Create Date'],))
+    
 def CreateTextbox(parentWid, iWidth, textString, justify):
     lineCount = int(math.ceil(len(textString)/iWidth))
     newtextbox = Text(parentWid, height = lineCount, width=iWidth - 15, wrap = WORD, bg ='white', bd =0, padx = 15)
