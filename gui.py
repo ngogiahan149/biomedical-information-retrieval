@@ -57,8 +57,8 @@ class mainWindow():
 
         global counter_content
         # ADDING A SCROLLBAR
-        for widget in frame.winfo_children():
-            widget.destroy()
+        # for widget in frame.winfo_children():
+        #     widget.destroy()
 
         mycanvas = Canvas(
             frame,
@@ -198,7 +198,7 @@ class mainWindow():
             command = lambda: advancedSearch(second_frame, entry_1.get(), nlp),
         )
         button_advancedSearch.place(
-            x=650.0,
+            x=670.0,
             y=25.0,
             width=99.0,
             height=32.0

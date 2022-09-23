@@ -55,7 +55,6 @@ def LancasterStemming(text):
         stemmedWord = lancaster.stem(word)
         listStem.append(stemmedWord)
     return ' '.join(listStem)
-nlp = spacy.load('en_core_web_lg')
 
 # customer sentence segmenter for creating spacy document object
 # def setCustomBoundaries(doc):
@@ -68,8 +67,7 @@ def getSpacyDocument(text, nlp):
     main_doc = nlp(text)  # create spacy document object
     return main_doc
 
-# # adding setCusotmeBoundaries to the pipeline
-# nlp.add_pipe(setCustomBoundaries(documents), before='parser')
+
 # convert keywords to vector
 def createKeywordsVectors(keyword, nlp):
       # convert to document object

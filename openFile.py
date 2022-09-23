@@ -75,6 +75,8 @@ def parse_xml():
     return rows, cols
 
 def display_xml(frame, canvas):
+    for widget in frame.winfo_children():
+            widget.destroy()
     rows, cols = parse_xml()
     # scroll_canvas = Canvas(frame)
     # scroll_canvas = Canvas(frame)
@@ -230,6 +232,8 @@ def display_xml(frame, canvas):
     
     
 def display_json(frame):
+    for widget in frame.winfo_children():
+            widget.destroy()
     fileName = open_json()     
      #Open JSON file
     f = open(fileName.name, 'r', encoding="utf8")    
