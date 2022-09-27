@@ -5,7 +5,11 @@ import xml.etree.ElementTree as ET
 import pandas as pd
 import json
 from textSummarize import summarize
+from zipfDistribution import *
 import math
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, 
+NavigationToolbar2Tk)
 def open_xml():
     filetypes = (
         ('xml files', '*.xml'),
@@ -74,7 +78,7 @@ def parse_xml():
         ])
     return rows, cols
 
-def display_xml(frame, canvas):
+def display_xml(frame):
     for widget in frame.winfo_children():
             widget.destroy()
     rows, cols = parse_xml()
@@ -231,8 +235,8 @@ def display_xml(frame, canvas):
                 ttk.Label(analysisFrame, text = totalSummary,  wraplength=700,background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=1, column=4, padx =5, pady =5, columnspan = 1, rowspan=5)
     
     
-def display_json(frame):
-    for widget in frame.winfo_children():
+def display_json(frame, chart_frame):
+    for widget in frame.winfo_children() or chart_frame.winfo_children():
             widget.destroy()
     fileName = open_json()     
      #Open JSON file
@@ -286,7 +290,6 @@ def display_json(frame):
 
         #Total analysis
         total = ''.join('{}. {}'.format(ArticleTitle, AbstractList))
-        print(total)
         totalNumOfChar, totalNumOfWord, totalNumOfSentence, totalSummary = summarize(total)
 
         #Column name
@@ -322,6 +325,47 @@ def display_json(frame):
         separator = Frame(frame, bd=10, relief='sunken', height=4, bg = "#EE6983")
         separator.pack(side='top', fill='x')
 
+        #Create zipf distribution charts
+        fig = Figure(figsize = (10, 3.2), dpi = 100)
+        fig.autofmt_xdate()
+        #Number of word for zipf distribution
+        zipf_number = 10
+        
+        # adding the subplot "Original data"
+        plot1 = fig.add_subplot(131)
+        top_frequency = topFrequencyWord(total, zipf_number)
+        table_original = createZipfTable(top_frequency)
+        # plot1.set_ylabel("Frequency")
+        # plot1.set_xlabel("Words")
+        # plot1.tick_params('x', labelrotation = 45, labelsize = 8)
+        # # plot1.xticks(rotation=90)    #to rotate x-axis values
+        # plot1.plot([item['word'] for item in table_original], [item['expected_frequency'] for item in table_original], 
+        #     marker='o', markerfacecolor='blue', markersize=8, color='skyblue', linewidth=2, label = 'Expected frequency')
+        # plot1.bar([item['word'] for item in table_original], [item['actual_frequency'] for item in table_original], color = 'olive', label = 'Actual frequency')
+        # plot1.legend()
+        # plot1.set_title( "Original data")
+        createChart(plot1, table_original, "Original data")
+
+         # adding the subplot "Original data"
+        plot2 = fig.add_subplot(132)
+        top_frequency = topFrequencyWord(total, zipf_number)
+        table_original = createZipfTable(top_frequency)
+        createChart(plot2, table_original, "Porter's Stemming")
+
+         # adding the subplot "Original data"
+        plot3 = fig.add_subplot(133)
+        top_frequency = topFrequencyWord(total, zipf_number)
+        table_original = createZipfTable(top_frequency)
+        createChart(plot3, table_original, "Lancaster Stemming")
+        
+        # creating the Tkinter canvas
+        # containing the Matplotlib figure
+        canvas = FigureCanvasTkAgg(fig, master = chart_frame)  
+        canvas.draw()
+    
+        # placing the canvas on the Tkinter window
+        canvas.get_tk_widget().pack()
+        
     
 def CreateTextbox(parentWid, iWidth, textString, justify):
     lineCount = int(math.ceil(len(textString)/iWidth))

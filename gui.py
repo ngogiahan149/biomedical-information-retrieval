@@ -49,7 +49,7 @@ class mainWindow():
             outline="")
         # Rectangle for file content
        
-        frame = Frame(canvas, width = 1000, height = 700, background = "white")
+        frame = Frame(canvas, width = 1000, height = 400, background = "white")
         frame.place(
             x = 191.0,
             y = 68.0,
@@ -62,8 +62,8 @@ class mainWindow():
 
         mycanvas = Canvas(
             frame,
-            bg="#FFF5E4",
-            height=600,
+            bg="white",
+            height=400,
             width=1000,
             bd=0,
             highlightthickness=0,
@@ -98,7 +98,12 @@ class mainWindow():
             fill="#FFFFFF",
             outline="")
         
-        
+        # Create Frame for display chart
+        chart_frame = Frame(canvas, width = 1000, height = 230, background = "white")
+        chart_frame.place(
+            x = 191.0,
+            y = 470.0,
+        )
         #Button import XML 
         button_image_1 = PhotoImage(
             file=relative_to_assets("button_1.png"))   
@@ -106,7 +111,7 @@ class mainWindow():
             image=button_image_1,
             borderwidth=0,
             highlightthickness=0,
-            command = lambda: display_xml(second_frame, mycanvas),
+            command = lambda: display_xml(second_frame),
             relief="flat"
         )
         button_1.place(
@@ -122,7 +127,7 @@ class mainWindow():
             image=button_image_2,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: display_json(second_frame),
+            command=lambda: display_json(second_frame, chart_frame),
             relief="flat"
         )
         button_2.place(

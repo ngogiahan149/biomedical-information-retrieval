@@ -141,6 +141,5 @@ def advancedSearch(frame, keyword, nlp):
         if widget.winfo_class() == 'Text':
             #To get input from widget for passing into search_for_keyword()
             matched_text = search_for_keyword(keyword, widget.get("1.0",'end-1c'), nlp)
-            for item in matched_text:
-                print(item)
+            for item in matched_text:                
                 simpleSearch2(widget, item, foreground = 'red')  
