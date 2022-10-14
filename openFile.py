@@ -2,14 +2,16 @@ from tkinter import *
 from tkinter import filedialog, ttk
 from tkinter.messagebox import showinfo
 import xml.etree.ElementTree as ET
-import pandas as pd
 import json
+from autocomplete import *
+from search import *
 from textSummarize import summarize
 from zipfDistribution import *
 import math
 from matplotlib.figure import Figure
-from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, 
-NavigationToolbar2Tk)
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from gingerit.gingerit import GingerIt
+
 def open_xml():
     filetypes = (
         ('xml files', '*.xml'),
@@ -78,44 +80,13 @@ def parse_xml():
         ])
     return rows, cols
 
-def display_xml(frame):
+def display_xml(frame, chart_frame, window, button_simpleSearch, button_advancedSearch, nlp):
     for widget in frame.winfo_children():
             widget.destroy()
+    for widget in chart_frame.winfo_children():
+            widget.destroy()
     rows, cols = parse_xml()
-    # scroll_canvas = Canvas(frame)
-    # scroll_canvas = Canvas(frame)
-    # scroll_canvas.place(relx=0.01, rely=0.01, relwidth = 1, relheight = 1)
-    # vsb = Scrollbar(frame, orient="vertical", command=scroll_canvas.yview)
-    # vsb.place(relx=0.98, rely=0.006, relheight=1, width=100)
-    
-    # hsb = Scrollbar(frame, orient="horizontal", command=scroll_canvas.xview)
-    # hsb.place(relx=0.005, rely=0.95, height=400, width=500)
-    # scroll_canvas.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
-    
-    
-
-    
-    
-    # #insert data to rows in table
-    # for i, (PMID, 
-    #         JournalISSN,
-    #         JournalTitle,
-    #         ISOAbbreviation,
-    #         ArticleTitle,
-    #         Language,
-    #         AbstractList,          
-    #         AuthorList,
-    #         KeywordList,
-    #         PublicationTypeList,
-    #         JournalCountry,
-    #         ) in enumerate(rows, start = 1):
-    #             listBox.insert("", "end", values=(PMID, JournalISSN, JournalTitle, ISOAbbreviation, ArticleTitle, Language, ', '.join([item.text for item in AbstractList]),
-    #             ', '.join(['{0} {1}'.format(item.findall('ForeName')[0].text, item.findall('LastName')[0].text) for item in AuthorList]),
-    #             ', '.join([item.text for item in KeywordList]),
-    #             ', '.join([item.text for item in PublicationTypeList]),
-    #             JournalCountry, 
-    #             ))
-    #             print(item.text for item in KeywordList)
+    all_text = ''
     for i, (PMID, 
             JournalISSN,
             JournalTitle,
@@ -191,6 +162,9 @@ def display_xml(frame):
                 total = ''.join('{} {} {} {}.'.format(JournalTitle, ArticleTitle, abstractContent, keyword))
                 totalNumOfChar, totalNumOfWord, totalNumOfSentence, totalSummary = summarize(total)
 
+                #Get all text for stemming analysis
+                all_text = all_text + ' ' + total
+
                 ttk.Label(analysisFrame, text = ('Num of'),background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold'), anchor = 'w', justify=LEFT).grid(row=0, column=0, padx = 2, pady =5)
                 ttk.Label(analysisFrame, text = ('Characters'),background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=0, column=1, padx =2, pady =5)
                 ttk.Label(analysisFrame, text = ('Words'),background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=0, column=2, padx =2, pady =5)
@@ -233,15 +207,72 @@ def display_xml(frame):
                 
                 #Summary content
                 ttk.Label(analysisFrame, text = totalSummary,  wraplength=700,background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=1, column=4, padx =5, pady =5, columnspan = 1, rowspan=5)
+    lista = autocomplete_text(frame)
+    #Create zipf distribution charts
+    fig = Figure(figsize = (10.5, 3.2), dpi = 100)
+    fig.autofmt_xdate()
+    #Number of word for zipf distribution
+    zipf_number = 10
     
+    # adding the subplot "Original data"
+    plot1 = fig.add_subplot(141)
+    top_frequency1 = topFrequencyWord(all_text, zipf_number)
+    table_original1 = createZipfTable(top_frequency1)
+    createChart(plot1, table_original1, "Original data")
+
+        # adding the subplot "Porter Stemming"
+    plot2 = fig.add_subplot(142)
+    porter_text = PorterStemming(all_text)
+    top_frequency2 = topFrequencyWord(porter_text, zipf_number)
+    table_original2 = createZipfTable(top_frequency2)
+    createChart(plot2, table_original2, "Porter's Stemming")
+
+    # adding the subplot "Snowwball Stemming"
+    plot3 = fig.add_subplot(143)
+    regexp_text = RegexpStemming(all_text)
+    top_frequency3 = topFrequencyWord(regexp_text, zipf_number)
+    table_original3 = createZipfTable(top_frequency3)
+    createChart(plot3, table_original3, "Regexp Stemming")
+
+        # adding the subplot "Lancaster Stemming"
+    plot4 = fig.add_subplot(144)
+    lancaster_text = LancasterStemming(all_text)
+    top_frequency4 = topFrequencyWord(lancaster_text, zipf_number)
+    table_original4 = createZipfTable(top_frequency4)
+    createChart(plot4, table_original4, "Lancaster Stemming")
     
-def display_json(frame, chart_frame):
-    for widget in frame.winfo_children() or chart_frame.winfo_children():
+    # creating the Tkinter canvas
+    # containing the Matplotlib figure
+    canvas = FigureCanvasTkAgg(fig, master = chart_frame)  
+    canvas.draw()
+
+    # placing the canvas on the Tkinter window
+    canvas.get_tk_widget().pack()
+
+    #Autocomplete search
+    lista = autocomplete_text(frame)
+    entry_1 = AutocompleteEntry(lista, window)
+    entry_1.place(
+        x=247.0,
+        y=28.0,
+        width=245.0,
+        height=20.0,
+    )
+
+    #Add search function
+    button_simpleSearch.configure(command = lambda: searchFunc(frame, entry_1.get()))
+    button_advancedSearch.configure(command = lambda: advancedSearch(frame, entry_1.get(), nlp))
+    
+def display_json(frame, chart_frame, window, button_simpleSearch, button_advancedSearch, nlp):
+    
+    for widget in frame.winfo_children():
+            widget.destroy()
+    for widget in chart_frame.winfo_children():
             widget.destroy()
     fileName = open_json()     
      #Open JSON file
     f = open(fileName.name, 'r', encoding="utf8")    
-
+    all_text = ''
     #Return JSON file as a dictionary
     data = json.load(f)     
     for item in data:
@@ -291,7 +322,10 @@ def display_json(frame, chart_frame):
         #Total analysis
         total = ''.join('{}. {}'.format(ArticleTitle, AbstractList))
         totalNumOfChar, totalNumOfWord, totalNumOfSentence, totalSummary = summarize(total)
-
+        
+        #Get all text for stemming analysis
+        all_text = all_text + ' ' + total
+        
         #Column name
         ttk.Label(analysisFrame, text = ('Num of'),background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold'), anchor = 'w', justify=LEFT).grid(row=0, column=0, padx = 2, pady =5)
         ttk.Label(analysisFrame, text = ('Characters'),background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=0, column=1, padx =2, pady =5)
@@ -325,46 +359,60 @@ def display_json(frame, chart_frame):
         separator = Frame(frame, bd=10, relief='sunken', height=4, bg = "#EE6983")
         separator.pack(side='top', fill='x')
 
-        #Create zipf distribution charts
-        fig = Figure(figsize = (10, 3.2), dpi = 100)
-        fig.autofmt_xdate()
-        #Number of word for zipf distribution
-        zipf_number = 10
-        
-        # adding the subplot "Original data"
-        plot1 = fig.add_subplot(131)
-        top_frequency = topFrequencyWord(total, zipf_number)
-        table_original = createZipfTable(top_frequency)
-        # plot1.set_ylabel("Frequency")
-        # plot1.set_xlabel("Words")
-        # plot1.tick_params('x', labelrotation = 45, labelsize = 8)
-        # # plot1.xticks(rotation=90)    #to rotate x-axis values
-        # plot1.plot([item['word'] for item in table_original], [item['expected_frequency'] for item in table_original], 
-        #     marker='o', markerfacecolor='blue', markersize=8, color='skyblue', linewidth=2, label = 'Expected frequency')
-        # plot1.bar([item['word'] for item in table_original], [item['actual_frequency'] for item in table_original], color = 'olive', label = 'Actual frequency')
-        # plot1.legend()
-        # plot1.set_title( "Original data")
-        createChart(plot1, table_original, "Original data")
-
-         # adding the subplot "Original data"
-        plot2 = fig.add_subplot(132)
-        top_frequency = topFrequencyWord(total, zipf_number)
-        table_original = createZipfTable(top_frequency)
-        createChart(plot2, table_original, "Porter's Stemming")
-
-         # adding the subplot "Original data"
-        plot3 = fig.add_subplot(133)
-        top_frequency = topFrequencyWord(total, zipf_number)
-        table_original = createZipfTable(top_frequency)
-        createChart(plot3, table_original, "Lancaster Stemming")
-        
-        # creating the Tkinter canvas
-        # containing the Matplotlib figure
-        canvas = FigureCanvasTkAgg(fig, master = chart_frame)  
-        canvas.draw()
+    #Create zipf distribution charts
+    fig = Figure(figsize = (10.5, 3.2), dpi = 100)
+    fig.autofmt_xdate()
+    #Number of word for zipf distribution
+    zipf_number = 10
     
-        # placing the canvas on the Tkinter window
-        canvas.get_tk_widget().pack()
+    # adding the subplot "Original data"
+    plot1 = fig.add_subplot(141)
+    top_frequency1 = topFrequencyWord(all_text, zipf_number)
+    table_original1 = createZipfTable(top_frequency1)
+    createChart(plot1, table_original1, "Original data")
+
+        # adding the subplot "Porter Stemming"
+    plot2 = fig.add_subplot(142)
+    porter_text = PorterStemming(all_text)
+    top_frequency2 = topFrequencyWord(porter_text, zipf_number)
+    table_original2 = createZipfTable(top_frequency2)
+    createChart(plot2, table_original2, "Porter's Stemming")
+
+    # adding the subplot "Snowwball Stemming"
+    plot3 = fig.add_subplot(143)
+    regexp_text = RegexpStemming(all_text)
+    top_frequency3 = topFrequencyWord(regexp_text, zipf_number)
+    table_original3 = createZipfTable(top_frequency3)
+    createChart(plot3, table_original3, "Regexp Stemming")
+
+        # adding the subplot "Lancaster Stemming"
+    plot4 = fig.add_subplot(144)
+    lancaster_text = LancasterStemming(all_text)
+    top_frequency4 = topFrequencyWord(lancaster_text, zipf_number)
+    table_original4 = createZipfTable(top_frequency4)
+    createChart(plot4, table_original4, "Lancaster Stemming")
+    
+    # creating the Tkinter canvas
+    # containing the Matplotlib figure
+    canvas = FigureCanvasTkAgg(fig, master = chart_frame)  
+    canvas.draw()
+
+    # placing the canvas on the Tkinter window
+    canvas.get_tk_widget().pack()
+
+    #Autocomplete search
+    lista = autocomplete_text(frame)
+    entry_1 = AutocompleteEntry(lista, window)
+    entry_1.place(
+        x=247.0,
+        y=28.0,
+        width=245.0,
+        height=20.0,
+    )
+
+    #Add search function
+    button_simpleSearch.configure(command = lambda: searchFunc(frame, entry_1.get()))
+    button_advancedSearch.configure(command = lambda: advancedSearch(frame, entry_1.get(), nlp))
         
     
 def CreateTextbox(parentWid, iWidth, textString, justify):
@@ -375,3 +423,9 @@ def CreateTextbox(parentWid, iWidth, textString, justify):
     newtextbox.tag_add("tag_name", "1.0", "end")
     newtextbox.config(state=DISABLED)
     return newtextbox
+
+def grammar_correct(text, entry_grammar):
+    parser = GingerIt()
+    parser.parse(text)['result']
+    entry_grammar.delete(0, END)
+    entry_grammar.insert(0, parser.parse(text)['result'])

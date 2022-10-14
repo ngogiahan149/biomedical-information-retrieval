@@ -1,12 +1,12 @@
 from tkinter import *
 import nltk
-from nltk.stem import LancasterStemmer, SnowballStemmer
+from nltk.stem import LancasterStemmer, SnowballStemmer, PorterStemmer, RegexpStemmer
 from nltk.tokenize import RegexpTokenizer
 import spacy
 from spacy.matcher import PhraseMatcher
 from scipy import spatial
 import enchant
-from textSummarize import preprocessing
+from zipfDistribution import *
 def simpleSearch(text, keyword, foreground ='red'):
     text.tag_remove('found', '1.0', END)
     if keyword:
@@ -20,6 +20,7 @@ def simpleSearch(text, keyword, foreground ='red'):
         text.tag_add('found', idx, lastidx)
         idx = lastidx
         text.tag_config('found', foreground = foreground)
+# Search function applying in Advanced Search
 def simpleSearch2(text, keyword, foreground ='red'):
     #text.tag_remove('found', '0.0', END)
     if keyword:
@@ -38,9 +39,8 @@ def searchFunc(frame, keyword):
         if widget.winfo_class() == 'Text':
             simpleSearch(widget, keyword, foreground = 'red')
 def SnowwballStemming(text):
-    snowball = SnowballStemmer(language = 'English')
-    tokenizer = RegexpTokenizer(r'\w+')
-    tokens = tokenizer.tokenize(text)
+    snowball = SnowballStemmer(language = 'english')
+    tokens = text.split()
     listStem = []
     for word in tokens:
         stemmedWord = snowball.stem(word)
@@ -48,14 +48,28 @@ def SnowwballStemming(text):
     return ' '.join(listStem)
 def LancasterStemming(text):
     lancaster = LancasterStemmer()
-    tokenizer = RegexpTokenizer(r'\w+')
-    tokens = tokenizer.tokenize(text)
+    tokens = text.split()
     listStem = []
     for word in tokens:
         stemmedWord = lancaster.stem(word)
         listStem.append(stemmedWord)
     return ' '.join(listStem)
-
+def PorterStemming(text):
+    porter = PorterStemmer()
+    tokens = text.split()
+    listStem = []
+    for word in tokens:
+        stemmedWord = porter.stem(word)
+        listStem.append(stemmedWord)
+    return ' '.join(listStem)
+def RegexpStemming(text):
+    regexp = RegexpStemmer('ing$|s$|e$|able$', min=4)
+    tokens = text.split()
+    listStem = []
+    for word in tokens:
+        stemmedWord = regexp.stem(word)
+        listStem.append(stemmedWord)
+    return ' '.join(listStem)
 # customer sentence segmenter for creating spacy document object
 # def setCustomBoundaries(doc):
 #     # traversing through tokens in document object

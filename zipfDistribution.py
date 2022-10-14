@@ -5,10 +5,7 @@ import matplotlib.pyplot as plt
 s = "string string. With. Punctuation? hello \n hello, hello"
 def removePunc(text):
     return re.sub(r'[^\w\s]','',text).lower()
-def topFrequencyWord(text, top):
-    #Remove punctuation
-    text = removePunc(text)
-    
+def removeStopWords(text):
     # Remove stop words using stopwords from Spacy library
     text = text.split()
     # sp = spacy.load('en_core_web_lg')
@@ -16,6 +13,12 @@ def topFrequencyWord(text, top):
     all_stopwords = nltk.corpus.stopwords.words('english')
     # print(stopwords)
     word_without_stopword = [word for word in text if word not in all_stopwords]
+    return word_without_stopword
+def topFrequencyWord(text, top):
+    #Remove punctuation
+    text = removePunc(text)
+    
+    word_without_stopword = removeStopWords(text)
 
     #Calculate top frequency word
     counts = collections.Counter(word_without_stopword)
@@ -34,12 +37,11 @@ def createZipfTable(top_frequency):
 def createChart(plot, table, title):
     # %% Python visualization with pyplot
     plot.set_ylabel("Frequency")
-    plot.set_xlabel("Words")
     plot.tick_params('x', labelrotation = 50, labelsize = 7)
     # plot.xticks(rotation=90)    #to rotate x-axis values
     plot.plot([item['word'] for item in table], [item['expected_frequency'] for item in table], 
-        marker='o', markerfacecolor='blue', markersize=8, color='skyblue', linewidth=2, label = 'Expected frequency')
+        marker='o', markerfacecolor='blue', markersize = 6, color='skyblue', linewidth = 2, label = 'Expected frequency')
     plot.bar([item['word'] for item in table], [item['actual_frequency'] for item in table], color = 'olive', label = 'Actual frequency')
-    plot.legend()
+    plot.legend(fontsize = 5)
     plot.set_title(title)
 
