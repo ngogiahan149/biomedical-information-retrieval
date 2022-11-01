@@ -1,127 +1,73 @@
-from tkinter import *
-import re
+from transformers import BertForQuestionAnswering
 
-# lista = ['a', 'actions', 'additional', 'also', 'an', 'and', 'angle', 'are', 'as', 'be', 'bind', 'bracket', 'brackets', 'button', 'can', 'cases', 'configure', 'course', 'detail', 'enter', 'event', 'events', 'example', 'field', 'fields', 'for', 'give', 'important', 'in', 'information', 'is', 'it', 'just', 'key', 'keyboard', 'kind', 'leave', 'left', 'like', 'manager', 'many', 'match', 'modifier', 'most', 'of', 'or', 'others', 'out', 'part', 'simplify', 'space', 'specifier', 'specifies', 'string;', 'that', 'the', 'there', 'to', 'type', 'unless', 'use', 'used', 'user', 'various', 'ways', 'we', 'window', 'wish', 'you']
-lista = ['Update in COVID-19 in the intensive care unit from the 2020 HELLENIC Athens International symposium', 'Jordi Rello\xa01,\xa0Mirko Belliato\xa02,\xa0Meletios-Athanasios Dimopoulos\xa03,\xa0Evangelos J Giamarellos-Bourboulis\xa04,\xa0Vladimir Jaksic\xa05,\xa0Ignacio Martin-Loeches\xa06,\xa0Iosif Mporas\xa07,\xa0Paolo Pelosi\xa08,\xa0Garyphallia Poulakou\xa09,\xa0Spyridon Pournaras\xa010,\xa0Maximiliano Tamae-Kakazu\xa011,\xa0Jean-François Timsit\xa012,\xa0Grant Waterer\xa013,\xa0Sofia Tejada\xa014,\xa0George Dimopoulos\xa015', 'The 2020 International Web Scientific']
+model = BertForQuestionAnswering.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad', return_dict=False)
+from transformers import BertTokenizer
 
-class AutocompleteEntry(Entry):
-    def __init__(self, lista, *args, **kwargs):
+tokenizer = BertTokenizer.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
+import torch
+def answer_question(question, answer_text):
+    '''
+    Takes a `question` string and an `answer_text` string (which contains the
+    answer), and identifies the words within the `answer_text` that are the
+    answer. Prints them out.
+    '''
+    # ======== Tokenize ========
+    # Apply the tokenizer to the input text, treating them as a text-pair.
+    input_ids = tokenizer.encode(question, answer_text)
+
+    # Report how long the input sequence is.
+    print('Query has {:,} tokens.\n'.format(len(input_ids)))
+
+    # ======== Set Segment IDs ========
+    # Search the input_ids for the first instance of the `[SEP]` token.
+    sep_index = input_ids.index(tokenizer.sep_token_id)
+
+    # The number of segment A tokens includes the [SEP] token istelf.
+    num_seg_a = sep_index + 1
+
+    # The remainder are segment B.
+    num_seg_b = len(input_ids) - num_seg_a
+
+    # Construct the list of 0s and 1s.
+    segment_ids = [0]*num_seg_a + [1]*num_seg_b
+
+    # There should be a segment_id for every input token.
+    assert len(segment_ids) == len(input_ids)
+
+    # ======== Evaluate ========
+    # Run our example question through the model.
+    start_scores, end_scores = model(torch.tensor([input_ids]), # The tokens representing our input text.
+                                    token_type_ids=torch.tensor([segment_ids])) # The segment IDs to differentiate question from answer_text
+
+    # ======== Reconstruct Answer ========
+    # Find the tokens with the highest `start` and `end` scores.
+    answer_start = torch.argmax(start_scores)
+    answer_end = torch.argmax(end_scores)
+
+    # Get the string versions of the input tokens.
+    tokens = tokenizer.convert_ids_to_tokens(input_ids)
+
+    # Start with the first token.
+    answer = tokens[answer_start]
+
+    # Select the remaining answer tokens and join them with whitespace.
+    for i in range(answer_start + 1, answer_end + 1):
         
-        Entry.__init__(self, *args, **kwargs)
-        self.lista = lista        
-        self.var = self["textvariable"]
-        if self.var == '':
-            self.var = self["textvariable"] = StringVar()
-
-        self.var.trace('w', self.changed)
-        self.bind("<Right>", self.selection)
-        self.bind("<Up>", self.up)
-        self.bind("<Down>", self.down)
+        # If it's a subword token, then recombine it with the previous token.
+        if tokens[i][0:2] == '##':
+            answer += tokens[i][2:]
         
-        self.lb_up = False
-
-    def changed(self, name, index, mode):  
-
-        if self.var.get() == '':
-            self.lb.destroy()
-            self.lb_up = False
+        # Otherwise, add a space then the token.
         else:
-            words = self.comparison()
-            if words:            
-                if not self.lb_up:
-                    self.lb = Listbox()
-                    self.lb.bind("<Double-Button-1>", self.selection)
-                    self.lb.bind("<Right>", self.selection)
-                    self.lb.place(x=self.winfo_x(), y=self.winfo_y()+self.winfo_height())
-                    self.lb_up = True
-                
-                self.lb.delete(0, END)
-                for w in words:
-                    self.lb.insert(END,w)
-            else:
-                if self.lb_up:
-                    self.lb.destroy()
-                    self.lb_up = False
-        
-    def selection(self, event):
+            answer += ' ' + tokens[i]
 
-        if self.lb_up:
-            self.var.set(self.lb.get(ACTIVE))
-            self.lb.destroy()
-            self.lb_up = False
-            self.icursor(END)
+    print('Answer: "' + answer + '"')
+import textwrap
 
-    def up(self, event):
+# Wrap text to 80 characters.
+wrapper = textwrap.TextWrapper(width=80) 
 
-        if self.lb_up:
-            if self.lb.curselection() == ():
-                index = '0'
-            else:
-                index = self.lb.curselection()[0]
-            if index != '0':                
-                self.lb.selection_clear(first=index)
-                index = str(int(index)-1)                
-                self.lb.selection_set(first=index)
-                self.lb.activate(index) 
+bert_abstract = "We introduce a new language representation model called BERT, which stands for Bidirectional Encoder Representations from Transformers. Unlike recent language representation models (Peters et al., 2018a; Radford et al., 2018), BERT is designed to pretrain deep bidirectional representations from unlabeled text by jointly conditioning on both left and right context in all layers. As a result, the pre-trained BERT model can be finetuned with just one additional output layer to create state-of-the-art models for a wide range of tasks, such as question answering and language inference, without substantial taskspecific architecture modifications. BERT is conceptually simple and empirically powerful. It obtains new state-of-the-art results on eleven natural language processing tasks, including pushing the GLUE score to 80.5% (7.7% point absolute improvement), MultiNLI accuracy to 86.7% (4.6% absolute improvement), SQuAD v1.1 question answering Test F1 to 93.2 (1.5 point absolute improvement) and SQuAD v2.0 Test F1 to 83.1 (5.1 point absolute improvement)."
+question = "What is BERT?"
 
-    def down(self, event):
-
-        if self.lb_up:
-            if self.lb.curselection() == ():
-                index = '0'
-            else:
-                index = self.lb.curselection()[0]
-            if index != END:                        
-                self.lb.selection_clear(first=index)
-                index = str(int(index)+1)        
-                self.lb.selection_set(first=index)
-                self.lb.activate(index) 
-
-    def comparison(self):
-        pattern = re.compile('.*' + self.var.get() + '.*')
-        return [w for w in self.lista if re.match(pattern, w.lower())]
-
-if __name__ == '__main__':
-    window = Tk()
-    window.geometry("1300x800")
-    window.configure(bg = "#FFF5E4")
-
-    #set up GUI with canvas
-    canvas = Canvas(
-        window,
-        bg = "#FFF5E4",
-        height = 800,
-        width = 1300,
-        bd = 0,
-        highlightthickness = 0,
-        relief = "ridge"
-    )
-    
-    
-    canvas.create_rectangle(
-        11.0,
-        18.0,
-        163.0,
-        450.0,
-        fill="#FFFFFF",
-        outline="")
-    # Rectangle for file content
-    
-    frame = Frame(canvas, width = 1000, height = 400, background = "white")
-    frame.place(
-        x = 191.0,
-        y = 68.0,
-    )
-    entry = AutocompleteEntry(lista, window)
-    entry.place(
-            x=200,
-            y=100,
-            width=245.0,
-            height=20.0,
-        )
-    print(entry.get())
-    # Button(text='nothing').grid(row=1, column=0)
-    # Button(text='nothing').grid(row=2, column=0)
-    # Button(text='nothing').grid(row=3, column=0)
-
-    window.mainloop()
+answer_question(question, bert_abstract)

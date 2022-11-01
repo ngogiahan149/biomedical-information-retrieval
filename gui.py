@@ -8,7 +8,6 @@ from tkinter import *
 from search import searchFunc, advancedSearch
 from openFile import *
 from textSummarize import *
-import spacy
 from autocomplete import *
 
 OUTPUT_PATH = Path(__file__).parent
@@ -20,10 +19,9 @@ def relative_to_assets(path: str) -> Path:
 class mainWindow():
     def __init__(self):
         window = Tk()
-        window.title("Search Engine")
+        window.title("Biomedical Information Retrieval")
         window.geometry("1300x800")
         window.configure(bg = "#FFF5E4")
-        #Create list of values for autocomplete
 
         #set up GUI with canvas
         canvas = Canvas(
@@ -77,15 +75,6 @@ class mainWindow():
         second_frame = Frame(mycanvas)
         mycanvas.create_window((0, 0), window=second_frame, anchor="nw")
 
-        # canvas.create_window(0, 0, window = frame)
-        # scroll_canvas = Canvas(frame)
-        # scroll_frame = Frame(scroll_canvas, width = 950, height = 700)
-        # scrollbar = Scrollbar(frame, orient="vertical", command=canvas.yview)
-        # scroll_frame.bind(
-        # "<Configure>",
-        # lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
-        # scroll_canvas.create_window(0,0, window=scroll_frame, anchor='nw')
-        # scroll_canvas.configure(yscrollcommand=scrollbar.set)
         canvas.grid(row = 3, column = 3)
         # scroll_canvas.place(relheight=1, relwidth=0.99)
         canvas.create_rectangle(
@@ -109,7 +98,7 @@ class mainWindow():
             image=button_image_1,
             borderwidth=0,
             highlightthickness=0,
-            command = lambda: display_xml(second_frame, chart_frame, window, button_simpleSearch, button_advancedSearch, nlp),
+            command = lambda: display_xml(second_frame, chart_frame, window, button_simpleSearch, button_advancedSearch),
             relief="flat"
         )
         button_1.place(
@@ -125,7 +114,7 @@ class mainWindow():
             image=button_image_2,
             borderwidth=0,
             highlightthickness=0,
-            command = lambda: display_json(second_frame, chart_frame, window, button_simpleSearch, button_advancedSearch, nlp),
+            command = lambda: display_json(second_frame, chart_frame, window, button_simpleSearch, button_advancedSearch),
             relief="flat"
         )
         button_2.place(
@@ -174,8 +163,8 @@ class mainWindow():
         # )
 
 
-        #Create nlp
-        nlp = spacy.load('en_core_web_lg')
+        # #Create nlp
+        # nlp = spacy.load('en_core_web_lg')
 
         #Button simple search
         button_simpleSearch = Button(

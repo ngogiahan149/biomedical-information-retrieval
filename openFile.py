@@ -10,7 +10,7 @@ from zipfDistribution import *
 import math
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from gingerit.gingerit import GingerIt
+# from gingerit.gingerit import GingerIt
 
 def open_xml():
     filetypes = (
@@ -80,7 +80,7 @@ def parse_xml():
         ])
     return rows, cols
 
-def display_xml(frame, chart_frame, window, button_simpleSearch, button_advancedSearch, nlp):
+def display_xml(frame, chart_frame, window, button_simpleSearch, button_advancedSearch):
     for widget in frame.winfo_children():
             widget.destroy()
     for widget in chart_frame.winfo_children():
@@ -263,7 +263,7 @@ def display_xml(frame, chart_frame, window, button_simpleSearch, button_advanced
     button_simpleSearch.configure(command = lambda: searchFunc(frame, entry_1.get()))
     button_advancedSearch.configure(command = lambda: advancedSearch(frame, entry_1.get(), nlp))
     
-def display_json(frame, chart_frame, window, button_simpleSearch, button_advancedSearch, nlp):
+def display_json(frame, chart_frame, window, button_simpleSearch, button_advancedSearch):
     
     for widget in frame.winfo_children():
             widget.destroy()
@@ -303,21 +303,13 @@ def display_json(frame, chart_frame, window, button_simpleSearch, button_advance
         abstractText.pack(fill='x')
         abstractText.configure(font=("RobotoRoman Regular", 10), background = 'white')
         
-        # Label(frame, text= AuthorList, background = 'white', wraplength=1050, font=("RobotoRoman Regular", 10, 'italic')).pack(side='top', fill='x')
-        # Label(frame, text=(''.join('{0} {1} {2} {3}'.format("PMID: ", pmid, "       DOI: ", doi)) ), background = 'white', wraplength=1050, font=("RobotoRoman Regular", 10), anchor = 'w', justify = LEFT).pack(side='top', fill='x')
-        # Label(frame, text=('Publication Year: {}'.format(Publication_Year)), wraplength=1050,font=("RobotoRoman Regular", 10), background = 'white', anchor = 'w', justify= LEFT).pack(side='top', fill = 'x')
-        # Label(frame, text=('Create Date: {}'.format(Create_Date)), wraplength=1050,font=("RobotoRoman Regular", 8), background = 'white', anchor = 'w', justify= LEFT).pack(side='top', fill = 'x')
-        # Label(frame, text='Citation', wraplength=1050, font=("RobotoCondensed Bold", 10, 'bold'), background = 'white').pack(side='top', fill='x')
-        # Label(frame, text= Citation, wraplength=1050,font=("RobotoRoman Regular", 10), background = 'white', anchor = 'w', justify= LEFT).pack(side='top', fill='x')
-        # # Label(frame, text=(''.join('{} {}'.format("Keywords: ", ', '.join([item.text for item in KeywordList])))), wraplength=1050,font=("RobotoRoman Regular", 10), background = 'white', anchor = 'w', justify= LEFT).pack(side='top', fill = 'x')
-        # Label(frame, text=('Journal/Book: {}'.format(Journal_Book)), wraplength=1050,font=("RobotoRoman Regular", 10), background = 'white', anchor = 'w', justify= LEFT).pack(side='top', fill = 'x')
-
-        # Table of character, word, sentence count
-        analysisFrame = LabelFrame(frame,  background='#850E35', foreground ='white')
-        analysisFrame.pack(fill="y", expand="yes", pady = 10, anchor = 's')
-        articleTitleNumOfChar, articleTitleNumOfWord, articleTitleNumOfSentence, articleTitleSummary = summarize(ArticleTitle)
-        abstractNumOfChar,abstractNumOfWord,abstractNumOfSentence, abstractSummary = summarize(AbstractList)
-        authorNum = len(AuthorList.split(','))
+        
+        # # Table of character, word, sentence count
+        # analysisFrame = LabelFrame(frame,  background='#850E35', foreground ='white')
+        # analysisFrame.pack(fill="y", expand="yes", pady = 10, anchor = 's')
+        # articleTitleNumOfChar, articleTitleNumOfWord, articleTitleNumOfSentence, articleTitleSummary = summarize(ArticleTitle)
+        # abstractNumOfChar,abstractNumOfWord,abstractNumOfSentence, abstractSummary = summarize(AbstractList)
+        # authorNum = len(AuthorList.split(','))
 
         #Total analysis
         total = ''.join('{}. {}'.format(ArticleTitle, AbstractList))
@@ -326,79 +318,79 @@ def display_json(frame, chart_frame, window, button_simpleSearch, button_advance
         #Get all text for stemming analysis
         all_text = all_text + ' ' + total
         
-        #Column name
-        ttk.Label(analysisFrame, text = ('Num of'),background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold'), anchor = 'w', justify=LEFT).grid(row=0, column=0, padx = 2, pady =5)
-        ttk.Label(analysisFrame, text = ('Characters'),background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=0, column=1, padx =2, pady =5)
-        ttk.Label(analysisFrame, text = ('Words'),background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=0, column=2, padx =2, pady =5)
-        ttk.Label(analysisFrame, text = ('Sentences'),background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=0, column=3, padx =2, pady =5)
-        ttk.Label(analysisFrame, text = ('Summary'),background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=0, column=4, padx =2, pady =5, columnspan= 4)
+        # #Column name
+        # ttk.Label(analysisFrame, text = ('Num of'),background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold'), anchor = 'w', justify=LEFT).grid(row=0, column=0, padx = 2, pady =5)
+        # ttk.Label(analysisFrame, text = ('Characters'),background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=0, column=1, padx =2, pady =5)
+        # ttk.Label(analysisFrame, text = ('Words'),background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=0, column=2, padx =2, pady =5)
+        # ttk.Label(analysisFrame, text = ('Sentences'),background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=0, column=3, padx =2, pady =5)
+        # ttk.Label(analysisFrame, text = ('Summary'),background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=0, column=4, padx =2, pady =5, columnspan= 4)
 
-        #Article analysis
-        ttk.Label(analysisFrame, text = 'Artile Title:', background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=1, column=0, padx =5, pady =5)
-        ttk.Label(analysisFrame, text = articleTitleNumOfChar,background='#850E35', foreground ='white', font=("RobotoCondensed Bold", 11, 'bold')).grid(row=1, column=1, padx =2, pady =5)
-        ttk.Label(analysisFrame, text = articleTitleNumOfWord,background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=1, column=2, padx =2, pady =5)
-        ttk.Label(analysisFrame, text = articleTitleNumOfSentence,background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=1, column=3, padx =2, pady =5)
+        # #Article analysis
+        # ttk.Label(analysisFrame, text = 'Artile Title:', background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=1, column=0, padx =5, pady =5)
+        # ttk.Label(analysisFrame, text = articleTitleNumOfChar,background='#850E35', foreground ='white', font=("RobotoCondensed Bold", 11, 'bold')).grid(row=1, column=1, padx =2, pady =5)
+        # ttk.Label(analysisFrame, text = articleTitleNumOfWord,background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=1, column=2, padx =2, pady =5)
+        # ttk.Label(analysisFrame, text = articleTitleNumOfSentence,background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=1, column=3, padx =2, pady =5)
         
-        #Abstract analysis
-        ttk.Label(analysisFrame, text = 'Abstract:', background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=2, column=0, padx =5, pady =5)
-        ttk.Label(analysisFrame, text = abstractNumOfChar,background='#850E35', foreground ='white', font=("RobotoCondensed Bold", 11, 'bold')).grid(row=2, column=1, padx =2, pady =5)
-        ttk.Label(analysisFrame, text = abstractNumOfWord,background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=2, column=2, padx =2, pady =5)
-        ttk.Label(analysisFrame, text = abstractNumOfSentence,background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=2, column=3, padx =2, pady =5)
-        # ttk.Label(analysisFrame, text = 'Keyword:', background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=3, column=0, padx =5, pady =5)
-        # ttk.Label(analysisFrame, text = keywordNumOfChar,background='#850E35', foreground ='white', font=("RobotoCondensed Bold", 11, 'bold')).grid(row=3, column=1, padx =2, pady =5)
-        # ttk.Label(analysisFrame, text = keywordNumOfWord,background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=3, column=2, padx =2, pady =5)
-        # ttk.Label(analysisFrame, text = keywordNumOfSentence,background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=3, column=3, padx =2, pady =5)
+        # #Abstract analysis
+        # ttk.Label(analysisFrame, text = 'Abstract:', background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=2, column=0, padx =5, pady =5)
+        # ttk.Label(analysisFrame, text = abstractNumOfChar,background='#850E35', foreground ='white', font=("RobotoCondensed Bold", 11, 'bold')).grid(row=2, column=1, padx =2, pady =5)
+        # ttk.Label(analysisFrame, text = abstractNumOfWord,background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=2, column=2, padx =2, pady =5)
+        # ttk.Label(analysisFrame, text = abstractNumOfSentence,background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=2, column=3, padx =2, pady =5)
+        # # ttk.Label(analysisFrame, text = 'Keyword:', background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=3, column=0, padx =5, pady =5)
+        # # ttk.Label(analysisFrame, text = keywordNumOfChar,background='#850E35', foreground ='white', font=("RobotoCondensed Bold", 11, 'bold')).grid(row=3, column=1, padx =2, pady =5)
+        # # ttk.Label(analysisFrame, text = keywordNumOfWord,background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=3, column=2, padx =2, pady =5)
+        # # ttk.Label(analysisFrame, text = keywordNumOfSentence,background='#850E35', foreground ='white',  font=("RobotoCondensed Bold", 11, 'bold')).grid(row=3, column=3, padx =2, pady =5)
         
-        #Author analysis
-        ttk.Label(analysisFrame, text = 'Author:', background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=3, column=0, padx =5, pady =5)
-        ttk.Label(analysisFrame, text = '{} authors'.format(authorNum),background='#850E35', foreground ='white', font=("RobotoCondensed Bold", 11, 'bold')).grid(row=3, column=1, padx =2, pady =5, columnspan = 3)
+        # #Author analysis
+        # ttk.Label(analysisFrame, text = 'Author:', background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=3, column=0, padx =5, pady =5)
+        # ttk.Label(analysisFrame, text = '{} authors'.format(authorNum),background='#850E35', foreground ='white', font=("RobotoCondensed Bold", 11, 'bold')).grid(row=3, column=1, padx =2, pady =5, columnspan = 3)
         
-        #Summary content
-        ttk.Label(analysisFrame, text = totalSummary,  wraplength=700,background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=1, column=4, padx =5, pady =5, columnspan = 1, rowspan=5)
+        # #Summary content
+        # ttk.Label(analysisFrame, text = totalSummary,  wraplength=700,background='#850E35', foreground ='white', font=("RobotoRoman Bold", 10, 'bold')).grid(row=1, column=4, padx =5, pady =5, columnspan = 1, rowspan=5)
     
         separator = Frame(frame, bd=10, relief='sunken', height=4, bg = "#EE6983")
         separator.pack(side='top', fill='x')
 
-    #Create zipf distribution charts
-    fig = Figure(figsize = (10.5, 3.2), dpi = 100)
-    fig.autofmt_xdate()
-    #Number of word for zipf distribution
-    zipf_number = 10
+    # #Create zipf distribution charts
+    # fig = Figure(figsize = (10.5, 3.2), dpi = 100)
+    # fig.autofmt_xdate()
+    # #Number of word for zipf distribution
+    # zipf_number = 10
     
-    # adding the subplot "Original data"
-    plot1 = fig.add_subplot(141)
-    top_frequency1 = topFrequencyWord(all_text, zipf_number)
-    table_original1 = createZipfTable(top_frequency1)
-    createChart(plot1, table_original1, "Original data")
+    # # adding the subplot "Original data"
+    # plot1 = fig.add_subplot(141)
+    # top_frequency1 = topFrequencyWord(all_text, zipf_number)
+    # table_original1 = createZipfTable(top_frequency1)
+    # createChart(plot1, table_original1, "Original data")
 
-        # adding the subplot "Porter Stemming"
-    plot2 = fig.add_subplot(142)
-    porter_text = PorterStemming(all_text)
-    top_frequency2 = topFrequencyWord(porter_text, zipf_number)
-    table_original2 = createZipfTable(top_frequency2)
-    createChart(plot2, table_original2, "Porter's Stemming")
+    #     # adding the subplot "Porter Stemming"
+    # plot2 = fig.add_subplot(142)
+    # porter_text = PorterStemming(all_text)
+    # top_frequency2 = topFrequencyWord(porter_text, zipf_number)
+    # table_original2 = createZipfTable(top_frequency2)
+    # createChart(plot2, table_original2, "Porter's Stemming")
 
-    # adding the subplot "Snowwball Stemming"
-    plot3 = fig.add_subplot(143)
-    regexp_text = RegexpStemming(all_text)
-    top_frequency3 = topFrequencyWord(regexp_text, zipf_number)
-    table_original3 = createZipfTable(top_frequency3)
-    createChart(plot3, table_original3, "Regexp Stemming")
+    # # adding the subplot "Snowwball Stemming"
+    # plot3 = fig.add_subplot(143)
+    # regexp_text = RegexpStemming(all_text)
+    # top_frequency3 = topFrequencyWord(regexp_text, zipf_number)
+    # table_original3 = createZipfTable(top_frequency3)
+    # createChart(plot3, table_original3, "Regexp Stemming")
 
-        # adding the subplot "Lancaster Stemming"
-    plot4 = fig.add_subplot(144)
-    lancaster_text = LancasterStemming(all_text)
-    top_frequency4 = topFrequencyWord(lancaster_text, zipf_number)
-    table_original4 = createZipfTable(top_frequency4)
-    createChart(plot4, table_original4, "Lancaster Stemming")
+    #     # adding the subplot "Lancaster Stemming"
+    # plot4 = fig.add_subplot(144)
+    # lancaster_text = LancasterStemming(all_text)
+    # top_frequency4 = topFrequencyWord(lancaster_text, zipf_number)
+    # table_original4 = createZipfTable(top_frequency4)
+    # createChart(plot4, table_original4, "Lancaster Stemming")
     
-    # creating the Tkinter canvas
-    # containing the Matplotlib figure
-    canvas = FigureCanvasTkAgg(fig, master = chart_frame)  
-    canvas.draw()
+    # # creating the Tkinter canvas
+    # # containing the Matplotlib figure
+    # canvas = FigureCanvasTkAgg(fig, master = chart_frame)  
+    # canvas.draw()
 
-    # placing the canvas on the Tkinter window
-    canvas.get_tk_widget().pack()
+    # # placing the canvas on the Tkinter window
+    # canvas.get_tk_widget().pack()
 
     #Autocomplete search
     lista = autocomplete_text(frame)
@@ -424,8 +416,8 @@ def CreateTextbox(parentWid, iWidth, textString, justify):
     newtextbox.config(state=DISABLED)
     return newtextbox
 
-def grammar_correct(text, entry_grammar):
-    parser = GingerIt()
-    parser.parse(text)['result']
-    entry_grammar.delete(0, END)
-    entry_grammar.insert(0, parser.parse(text)['result'])
+# def grammar_correct(text, entry_grammar):
+#     parser = GingerIt()
+#     parser.parse(text)['result']
+#     entry_grammar.delete(0, END)
+#     entry_grammar.insert(0, parser.parse(text)['result'])

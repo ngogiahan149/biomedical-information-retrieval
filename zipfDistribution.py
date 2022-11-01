@@ -1,4 +1,4 @@
-import re, collections, nltk, spacy
+import re, collections, nltk
 import numpy as np
 import matplotlib.pyplot as plt
 # from scipy import special
@@ -11,6 +11,8 @@ def removeStopWords(text):
     # sp = spacy.load('en_core_web_lg')
     # all_stopwords = sp.Defaults.stop_words
     all_stopwords = nltk.corpus.stopwords.words('english')
+    new_stopwords = ["1", "2", "3", "4", "5", "6", "7", "8"]
+    all_stopwords.extend(new_stopwords)
     # print(stopwords)
     word_without_stopword = [word for word in text if word not in all_stopwords]
     return word_without_stopword
@@ -34,8 +36,7 @@ def createZipfTable(top_frequency):
             "actual_frequency": frequency,
             "expected_frequency": top_count/index})
     return zipf_table
-def createChart(plot, table, title):
-    # %% Python visualization with pyplot
+def createChart(plot, table, title):    # %% Python visualization with pyplot
     plot.set_ylabel("Frequency")
     plot.tick_params('x', labelrotation = 50, labelsize = 7)
     # plot.xticks(rotation=90)    #to rotate x-axis values
