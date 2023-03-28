@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE PubmedArticleSet PUBLIC "-//NLM//DTD PubMedArticle, 1st January 2019//EN" "https://dtd.nlm.nih.gov/ncbi/pubmed/out/pubmed_190101.dtd">
+<PubmedArticleSet>
+   <PubmedArticle>
+      <MedlineCitation Owner="NLM" Status="MEDLINE">
+         <PMID Version="1">16731033</PMID>
+         <DateCompleted>
+            <Year>2006</Year>
+            <Month>08</Month>
+            <Day>16</Day>
+         </DateCompleted>
+         <DateRevised>
+            <Year>2022</Year>
+            <Month>03</Month>
+            <Day>16</Day>
+         </DateRevised>
+         <Article PubModel="Print-Electronic">
+            <Journal>
+               <ISSN IssnType="Print">1386-6532</ISSN>
+               <JournalIssue CitedMedium="Print">
+                  <Volume>36</Volume>
+                  <Issue>3</Issue>
+                  <PubDate>
+                     <Year>2006</Year>
+                     <Month>Jul</Month>
+                  </PubDate>
+               </JournalIssue>
+               <Title>Journal of clinical virology : the official publication of the Pan American Society for Clinical Virology</Title>
+               <ISOAbbreviation>J Clin Virol</ISOAbbreviation>
+            </Journal>
+            <ArticleTitle>Detection of monkeypox virus with real-time PCR assays.</ArticleTitle>
+            <Pagination>
+               <MedlinePgn>194-203</MedlinePgn>
+            </Pagination>
+            <Abstract>
+               <AbstractText Label="BACKGROUND" NlmCategory="BACKGROUND">Human monkeypox, a zoonotic disease, was first reported outside of Africa during the 2003 US outbreak.</AbstractText>
+               <AbstractText Label="OBJECTIVES" NlmCategory="OBJECTIVE">We present two real-time PCR assays critical for laboratory diagnosis of monkeypox during the 2003 US outbreak.</AbstractText>
+               <AbstractText Label="STUDY DESIGN" NlmCategory="METHODS">A TaqMan-based assay (E9L-NVAR) targets the orthopoxvirus DNA polymerase gene and detects Eurasian orthopoxviruses other than Variola. A hybridization assay, utilizing a MGB Eclipsetrade mark (Epoch Biosciences) probe, targets an envelope protein gene (B6R) and specifically detects monkeypox virus (MPXV). Assays were validated using coded orthopoxvirus DNA samples and used to evaluate lesion samples from five confirmed US monkeypox cases.</AbstractText>
+               <AbstractText Label="RESULTS" NlmCategory="RESULTS">E9L-NVAR did not detect variola (48 strains), North American orthopoxviruses (2), or DNA derived from non-poxviral rash illnesses. The assay reproducibly identified various concentrations of 13 Eurasian orthopoxvirus strains and was sensitive to 12.5 vaccinia genomes. The B6R assay recognized 15 different MPXV strains, while other orthopoxvirus (9) and bacteria (15) strains did not cross-react. Of the 13 human samples tested from confirmed cases, both assays identified 100% as containing MPXV DNA.</AbstractText>
+               <AbstractText Label="CONCLUSIONS" NlmCategory="CONCLUSIONS">E9L-NVAR and B6R assays demonstrate 100% specificity for non-variola Eurasian orthopoxvirus and MPXV, respectively. Using two discrete viral gene targets, these assays together provide a reliable and sensitive method for quickly confirming monkeypox infections.</AbstractText>
+            </Abstract>
+            <AuthorList CompleteYN="Y">
+               <Author ValidYN="Y">
+                  <LastName>Li</LastName>
+                  <ForeName>Yu</ForeName>
+                  <Initials>Y</Initials>
+                  <AffiliationInfo>
+                     <Affiliation>Poxvirus Program, Division of Viral and Rickettsial Diseases, National Centers of Infectious Diseases, Centers for Disease Control and Prevention, Mail Stop G-43, 1600 Clifton Road, NE, Atlanta, GA 30333, USA.</Affiliation>
+                  </AffiliationInfo>
+               </Author>
+               <Author ValidYN="Y">
+                  <LastName>Olson</LastName>
+                  <ForeName>Victoria A</ForeName>
+                  <Initials>VA</Initials>
+               </Author>
+               <Author ValidYN="Y">
+                  <LastName>Laue</LastName>
+                  <ForeName>Thomas</ForeName>
+                  <Initials>T</Initials>
+               </Author>
+               <Author ValidYN="Y">
+                  <LastName>Laker</LastName>
+                  <ForeName>Miriam T</ForeName>
+                  <Initials>MT</Initials>
+               </Author>
+               <Author ValidYN="Y">
+                  <LastName>Damon</LastName>
+                  <ForeName>Inger K</ForeName>
+                  <Initials>IK</Initials>
+               </Author>
+            </AuthorList>
+            <Language>eng</Language>
+            <PublicationTypeList>
+               <PublicationType UI="D023362">Evaluation Study</PublicationType>
+               <PublicationType UI="D016428">Journal Article</PublicationType>
+            </PublicationTypeList>
+            <ArticleDate DateType="Electronic">
+               <Year>2006</Year>
+               <Month>05</Month>
+               <Day>30</Day>
+            </ArticleDate>
+         </Article>
+         <MedlineJournalInfo>
+            <Country>Netherlands</Country>
+            <MedlineTA>J Clin Virol</MedlineTA>
+            <NlmUniqueID>9815671</NlmUniqueID>
+            <ISSNLinking>1386-6532</ISSNLinking>
+         </MedlineJournalInfo>
+         <ChemicalList>
+            <Chemical>
+               <RegistryNumber>0</RegistryNumber>
+               <NameOfSubstance UI="D004279">DNA, Viral</NameOfSubstance>
+            </Chemical>
+            <Chemical>
+               <RegistryNumber>0</RegistryNumber>
+               <NameOfSubstance UI="D011933">Reagent Kits, Diagnostic</NameOfSubstance>
+            </Chemical>
+            <Chemical>
+               <RegistryNumber>0</RegistryNumber>
+               <NameOfSubstance UI="D014759">Viral Envelope Proteins</NameOfSubstance>
+            </Chemical>
+            <Chemical>
+               <RegistryNumber>EC 2.7.7.-</RegistryNumber>
+               <NameOfSubstance UI="D019914">Taq Polymerase</NameOfSubstance>
+            </Chemical>
+            <Chemical>
+               <RegistryNumber>EC 2.7.7.7</RegistryNumber>
+               <NameOfSubstance UI="D004259">DNA-Directed DNA Polymerase</NameOfSubstance>
+            </Chemical>
+         </ChemicalList>
+         <CitationSubset>IM</CitationSubset>
+         <MeshHeadingList>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D000328">Adult</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D000818">Animals</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D001483">Base Sequence</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D002648">Child</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D002675">Child, Preschool</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D004279">DNA, Viral</DescriptorName>
+               <QualifierName MajorTopicYN="N" UI="Q000032">analysis</QualifierName>
+               <QualifierName MajorTopicYN="N" UI="Q000302">isolation &amp; purification</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D004259">DNA-Directed DNA Polymerase</DescriptorName>
+               <QualifierName MajorTopicYN="N" UI="Q000235">genetics</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="Y" UI="D004196">Disease Outbreaks</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D005260">Female</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D006801">Humans</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D007223">Infant</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D008297">Male</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D008969">Molecular Sequence Data</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D045908">Monkeypox</DescriptorName>
+               <QualifierName MajorTopicYN="Y" UI="Q000175">diagnosis</QualifierName>
+               <QualifierName MajorTopicYN="Y" UI="Q000453">epidemiology</QualifierName>
+               <QualifierName MajorTopicYN="N" UI="Q000821">virology</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D008993">Monkeypox virus</DescriptorName>
+               <QualifierName MajorTopicYN="N" UI="Q000235">genetics</QualifierName>
+               <QualifierName MajorTopicYN="Y" UI="Q000302">isolation &amp; purification</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D016133">Polymerase Chain Reaction</DescriptorName>
+               <QualifierName MajorTopicYN="Y" UI="Q000379">methods</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D011933">Reagent Kits, Diagnostic</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D012680">Sensitivity and Specificity</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D019914">Taq Polymerase</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" Type="Geographic" UI="D014481">United States</DescriptorName>
+               <QualifierName MajorTopicYN="N" UI="Q000453">epidemiology</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D014759">Viral Envelope Proteins</DescriptorName>
+               <QualifierName MajorTopicYN="N" UI="Q000235">genetics</QualifierName>
+            </MeshHeading>
+         </MeshHeadingList>
+      </MedlineCitation>
+      <PubmedData>
+         <History>
+            <PubMedPubDate PubStatus="received">
+               <Year>2005</Year>
+               <Month>09</Month>
+               <Day>07</Day>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="revised">
+               <Year>2006</Year>
+               <Month>03</Month>
+               <Day>13</Day>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="accepted">
+               <Year>2006</Year>
+               <Month>03</Month>
+               <Day>17</Day>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="pubmed">
+               <Year>2006</Year>
+               <Month>5</Month>
+               <Day>30</Day>
+               <Hour>9</Hour>
+               <Minute>0</Minute>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="medline">
+               <Year>2006</Year>
+               <Month>8</Month>
+               <Day>17</Day>
+               <Hour>9</Hour>
+               <Minute>0</Minute>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="entrez">
+               <Year>2006</Year>
+               <Month>5</Month>
+               <Day>30</Day>
+               <Hour>9</Hour>
+               <Minute>0</Minute>
+            </PubMedPubDate>
+         </History>
+         <PublicationStatus>ppublish</PublicationStatus>
+         <ArticleIdList>
+            <ArticleId IdType="pubmed">16731033</ArticleId>
+            <ArticleId IdType="pii">S1386-6532(06)00122-3</ArticleId>
+            <ArticleId IdType="doi">10.1016/j.jcv.2006.03.012</ArticleId>
+         </ArticleIdList>
+      </PubmedData>
+   </PubmedArticle>
+   <PubmedArticle>
+      <MedlineCitation Owner="NLM" Status="MEDLINE">
+         <PMID Version="1">16731033</PMID>
+         <DateCompleted>
+            <Year>2006</Year>
+            <Month>08</Month>
+            <Day>16</Day>
+         </DateCompleted>
+         <DateRevised>
+            <Year>2022</Year>
+            <Month>03</Month>
+            <Day>16</Day>
+         </DateRevised>
+         <Article PubModel="Print-Electronic">
+            <Journal>
+               <ISSN IssnType="Print">1386-6532</ISSN>
+               <JournalIssue CitedMedium="Print">
+                  <Volume>36</Volume>
+                  <Issue>3</Issue>
+                  <PubDate>
+                     <Year>2006</Year>
+                     <Month>Jul</Month>
+                  </PubDate>
+               </JournalIssue>
+               <Title>Journal of clinical virology : the official publication of the Pan American Society for Clinical Virology</Title>
+               <ISOAbbreviation>J Clin Virol</ISOAbbreviation>
+            </Journal>
+            <ArticleTitle>Detection of monkeypox virus with real-time PCR assays.</ArticleTitle>
+            <Pagination>
+               <MedlinePgn>194-203</MedlinePgn>
+            </Pagination>
+            <Abstract>
+               <AbstractText Label="BACKGROUND" NlmCategory="BACKGROUND">Human monkeypox, a zoonotic disease, was first reported outside of Africa during the 2003 US outbreak.</AbstractText>
+               <AbstractText Label="OBJECTIVES" NlmCategory="OBJECTIVE">We present two real-time PCR assays critical for laboratory diagnosis of monkeypox during the 2003 US outbreak.</AbstractText>
+               <AbstractText Label="STUDY DESIGN" NlmCategory="METHODS">A TaqMan-based assay (E9L-NVAR) targets the orthopoxvirus DNA polymerase gene and detects Eurasian orthopoxviruses other than Variola. A hybridization assay, utilizing a MGB Eclipsetrade mark (Epoch Biosciences) probe, targets an envelope protein gene (B6R) and specifically detects monkeypox virus (MPXV). Assays were validated using coded orthopoxvirus DNA samples and used to evaluate lesion samples from five confirmed US monkeypox cases.</AbstractText>
+               <AbstractText Label="RESULTS" NlmCategory="RESULTS">E9L-NVAR did not detect variola (48 strains), North American orthopoxviruses (2), or DNA derived from non-poxviral rash illnesses. The assay reproducibly identified various concentrations of 13 Eurasian orthopoxvirus strains and was sensitive to 12.5 vaccinia genomes. The B6R assay recognized 15 different MPXV strains, while other orthopoxvirus (9) and bacteria (15) strains did not cross-react. Of the 13 human samples tested from confirmed cases, both assays identified 100% as containing MPXV DNA.</AbstractText>
+               <AbstractText Label="CONCLUSIONS" NlmCategory="CONCLUSIONS">E9L-NVAR and B6R assays demonstrate 100% specificity for non-variola Eurasian orthopoxvirus and MPXV, respectively. Using two discrete viral gene targets, these assays together provide a reliable and sensitive method for quickly confirming monkeypox infections.</AbstractText>
+            </Abstract>
+            <AuthorList CompleteYN="Y">
+               <Author ValidYN="Y">
+                  <LastName>Li</LastName>
+                  <ForeName>Yu</ForeName>
+                  <Initials>Y</Initials>
+                  <AffiliationInfo>
+                     <Affiliation>Poxvirus Program, Division of Viral and Rickettsial Diseases, National Centers of Infectious Diseases, Centers for Disease Control and Prevention, Mail Stop G-43, 1600 Clifton Road, NE, Atlanta, GA 30333, USA.</Affiliation>
+                  </AffiliationInfo>
+               </Author>
+               <Author ValidYN="Y">
+                  <LastName>Olson</LastName>
+                  <ForeName>Victoria A</ForeName>
+                  <Initials>VA</Initials>
+               </Author>
+               <Author ValidYN="Y">
+                  <LastName>Laue</LastName>
+                  <ForeName>Thomas</ForeName>
+                  <Initials>T</Initials>
+               </Author>
+               <Author ValidYN="Y">
+                  <LastName>Laker</LastName>
+                  <ForeName>Miriam T</ForeName>
+                  <Initials>MT</Initials>
+               </Author>
+               <Author ValidYN="Y">
+                  <LastName>Damon</LastName>
+                  <ForeName>Inger K</ForeName>
+                  <Initials>IK</Initials>
+               </Author>
+            </AuthorList>
+            <Language>eng</Language>
+            <PublicationTypeList>
+               <PublicationType UI="D023362">Evaluation Study</PublicationType>
+               <PublicationType UI="D016428">Journal Article</PublicationType>
+            </PublicationTypeList>
+            <ArticleDate DateType="Electronic">
+               <Year>2006</Year>
+               <Month>05</Month>
+               <Day>30</Day>
+            </ArticleDate>
+         </Article>
+         <MedlineJournalInfo>
+            <Country>Netherlands</Country>
+            <MedlineTA>J Clin Virol</MedlineTA>
+            <NlmUniqueID>9815671</NlmUniqueID>
+            <ISSNLinking>1386-6532</ISSNLinking>
+         </MedlineJournalInfo>
+         <ChemicalList>
+            <Chemical>
+               <RegistryNumber>0</RegistryNumber>
+               <NameOfSubstance UI="D004279">DNA, Viral</NameOfSubstance>
+            </Chemical>
+            <Chemical>
+               <RegistryNumber>0</RegistryNumber>
+               <NameOfSubstance UI="D011933">Reagent Kits, Diagnostic</NameOfSubstance>
+            </Chemical>
+            <Chemical>
+               <RegistryNumber>0</RegistryNumber>
+               <NameOfSubstance UI="D014759">Viral Envelope Proteins</NameOfSubstance>
+            </Chemical>
+            <Chemical>
+               <RegistryNumber>EC 2.7.7.-</RegistryNumber>
+               <NameOfSubstance UI="D019914">Taq Polymerase</NameOfSubstance>
+            </Chemical>
+            <Chemical>
+               <RegistryNumber>EC 2.7.7.7</RegistryNumber>
+               <NameOfSubstance UI="D004259">DNA-Directed DNA Polymerase</NameOfSubstance>
+            </Chemical>
+         </ChemicalList>
+         <CitationSubset>IM</CitationSubset>
+         <MeshHeadingList>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D000328">Adult</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D000818">Animals</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D001483">Base Sequence</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D002648">Child</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D002675">Child, Preschool</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D004279">DNA, Viral</DescriptorName>
+               <QualifierName MajorTopicYN="N" UI="Q000032">analysis</QualifierName>
+               <QualifierName MajorTopicYN="N" UI="Q000302">isolation &amp; purification</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D004259">DNA-Directed DNA Polymerase</DescriptorName>
+               <QualifierName MajorTopicYN="N" UI="Q000235">genetics</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="Y" UI="D004196">Disease Outbreaks</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D005260">Female</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D006801">Humans</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D007223">Infant</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D008297">Male</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D008969">Molecular Sequence Data</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D045908">Monkeypox</DescriptorName>
+               <QualifierName MajorTopicYN="Y" UI="Q000175">diagnosis</QualifierName>
+               <QualifierName MajorTopicYN="Y" UI="Q000453">epidemiology</QualifierName>
+               <QualifierName MajorTopicYN="N" UI="Q000821">virology</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D008993">Monkeypox virus</DescriptorName>
+               <QualifierName MajorTopicYN="N" UI="Q000235">genetics</QualifierName>
+               <QualifierName MajorTopicYN="Y" UI="Q000302">isolation &amp; purification</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D016133">Polymerase Chain Reaction</DescriptorName>
+               <QualifierName MajorTopicYN="Y" UI="Q000379">methods</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D011933">Reagent Kits, Diagnostic</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D012680">Sensitivity and Specificity</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D019914">Taq Polymerase</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" Type="Geographic" UI="D014481">United States</DescriptorName>
+               <QualifierName MajorTopicYN="N" UI="Q000453">epidemiology</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+               <DescriptorName MajorTopicYN="N" UI="D014759">Viral Envelope Proteins</DescriptorName>
+               <QualifierName MajorTopicYN="N" UI="Q000235">genetics</QualifierName>
+            </MeshHeading>
+         </MeshHeadingList>
+      </MedlineCitation>
+      <PubmedData>
+         <History>
+            <PubMedPubDate PubStatus="received">
+               <Year>2005</Year>
+               <Month>09</Month>
+               <Day>07</Day>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="revised">
+               <Year>2006</Year>
+               <Month>03</Month>
+               <Day>13</Day>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="accepted">
+               <Year>2006</Year>
+               <Month>03</Month>
+               <Day>17</Day>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="pubmed">
+               <Year>2006</Year>
+               <Month>5</Month>
+               <Day>30</Day>
+               <Hour>9</Hour>
+               <Minute>0</Minute>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="medline">
+               <Year>2006</Year>
+               <Month>8</Month>
+               <Day>17</Day>
+               <Hour>9</Hour>
+               <Minute>0</Minute>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="entrez">
+               <Year>2006</Year>
+               <Month>5</Month>
+               <Day>30</Day>
+               <Hour>9</Hour>
+               <Minute>0</Minute>
+            </PubMedPubDate>
+         </History>
+         <PublicationStatus>ppublish</PublicationStatus>
+         <ArticleIdList>
+            <ArticleId IdType="pubmed">16731033</ArticleId>
+            <ArticleId IdType="pii">S1386-6532(06)00122-3</ArticleId>
+            <ArticleId IdType="doi">10.1016/j.jcv.2006.03.012</ArticleId>
+         </ArticleIdList>
+      </PubmedData>
+   </PubmedArticle>
+   <PubmedArticle>
+    <MedlineCitation Status="Publisher" Owner="NLM">
+        <PMID Version="1">32949798</PMID>
+        <DateRevised>
+            <Year>2020</Year>
+            <Month>09</Month>
+            <Day>19</Day>
+        </DateRevised>
+        <Article PubModel="Print-Electronic">
+            <Journal>
+                <ISSN IssnType="Electronic">1878-8769</ISSN>
+                <JournalIssue CitedMedium="Internet">
+                    <PubDate>
+                        <Year>2020</Year>
+                        <Month>Sep</Month>
+                        <Day>16</Day>
+                    </PubDate>
+                </JournalIssue>
+                <Title>World neurosurgery</Title>
+                <ISOAbbreviation>World Neurosurg</ISOAbbreviation>
+            </Journal>
+            <ArticleTitle>Neurosurgical services in the Northern Zone of Sarawak in Malaysia: The way forward amid COVID-19 pandemic.</ArticleTitle>
+            <ELocationID EIdType="pii" ValidYN="Y">S1878-8750(20)32053-2</ELocationID>
+            <ELocationID EIdType="doi" ValidYN="Y">10.1016/j.wneu.2020.09.045</ELocationID>
+            <Abstract>
+                <AbstractText Label="BACKGROUND" NlmCategory="BACKGROUND">The novel coronavirus disease 2019 (COVID-19) pandemic has set a huge challenge to the delivery of neurosurgical services including the transfer of patients. We aimed to share our strategy in handling neurosurgical emergencies at a remote center in Borneo Island. Our objectives included discussing the logistic and geographical challenges faced during the COVID-19 pandemic.</AbstractText>
+                <AbstractText Label="METHODS" NlmCategory="METHODS">Miri General Hospital (MGH) is a remote center in Sarawak, Malaysia, serving a population with difficult access to neurosurgical services. Two neurosurgeons were stationed here on a rotational basis every fortnight during the pandemic to handle neurosurgical cases. Patients were triaged depending on their urgent needs for surgery or transfer to a neurosurgical center and managed accordingly. All patients were screened for potential risk of contracting COVID-19 prior to the surgery. Based on this, the level of personal protective equipment required for the healthcare workers involved was determined.</AbstractText>
+                <AbstractText Label="RESULTS" NlmCategory="RESULTS">During the initial six weeks of the Movement Control Order (MCO) in Malaysia, there were 50 urgent neurosurgical consultations. Twenty patients (40%) required emergency surgery or intervention. There were nine vascular (45%), five trauma (25%), four tumor (15%), and two infection cases (10%). Eighteen patients were operated at MGH, among whom 17 (94.4%) survived. Ninety percent of anticipated transfers were avoided. None of the medical staff acquired COVID-19.</AbstractText>
+                <AbstractText Label="CONCLUSIONS" NlmCategory="CONCLUSIONS">This framework allowed timely intervention for neurosurgical emergencies (within a safe limit), minimized transfer, and enabled uninterrupted neurosurgical services at a remote center with difficult access to neurosurgical care during a pandemic.</AbstractText>
+                <CopyrightInformation>Copyright © 2020 Elsevier Inc. All rights reserved.</CopyrightInformation>
+            </Abstract>
+            <AuthorList CompleteYN="Y">
+                <Author ValidYN="Y">
+                    <LastName>Low</LastName>
+                    <ForeName>Peh Hueh</ForeName>
+                    <Initials>PH</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Department of Neurosurgery, Sarawak General Hospital, Kuching, Sarawak, Malaysia. Electronic address: peh.hueh@gmail.com.</Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Mangat</LastName>
+                    <ForeName>Manvinder Singh</ForeName>
+                    <Initials>MS</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Department of Neurosurgery, Sarawak General Hospital, Kuching, Sarawak, Malaysia.</Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>San Liew</LastName>
+                    <ForeName>Donald Ngian</ForeName>
+                    <Initials>DN</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Department of Neurosurgery, Sarawak General Hospital, Kuching, Sarawak, Malaysia.</Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Hieng Wong</LastName>
+                    <ForeName>Albert Sii</ForeName>
+                    <Initials>AS</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Department of Neurosurgery, Sarawak General Hospital, Kuching, Sarawak, Malaysia.</Affiliation>
+                    </AffiliationInfo>
+                </Author>
+            </AuthorList>
+            <Language>eng</Language>
+            <PublicationTypeList>
+                <PublicationType UI="D016428">Journal Article</PublicationType>
+            </PublicationTypeList>
+            <ArticleDate DateType="Electronic">
+                <Year>2020</Year>
+                <Month>09</Month>
+                <Day>16</Day>
+            </ArticleDate>
+        </Article>
+        <MedlineJournalInfo>
+            <Country>United States</Country>
+            <MedlineTA>World Neurosurg</MedlineTA>
+            <NlmUniqueID>101528275</NlmUniqueID>
+            <ISSNLinking>1878-8750</ISSNLinking>
+        </MedlineJournalInfo>
+        <CitationSubset>IM</CitationSubset>
+        <KeywordList Owner="NOTNLM">
+            <Keyword MajorTopicYN="N">COVID-19</Keyword>
+            <Keyword MajorTopicYN="N">Neurosurgical emergencies</Keyword>
+            <Keyword MajorTopicYN="N">pandemic</Keyword>
+            <Keyword MajorTopicYN="N">remote center</Keyword>
+        </KeywordList>
+    </MedlineCitation>
+    <PubmedData>
+        <History>
+            <PubMedPubDate PubStatus="received">
+                <Year>2020</Year>
+                <Month>08</Month>
+                <Day>06</Day>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="revised">
+                <Year>2020</Year>
+                <Month>09</Month>
+                <Day>09</Day>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="accepted">
+                <Year>2020</Year>
+                <Month>09</Month>
+                <Day>10</Day>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="entrez">
+                <Year>2020</Year>
+                <Month>9</Month>
+                <Day>19</Day>
+                <Hour>20</Hour>
+                <Minute>10</Minute>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="pubmed">
+                <Year>2020</Year>
+                <Month>9</Month>
+                <Day>20</Day>
+                <Hour>6</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="medline">
+                <Year>2020</Year>
+                <Month>9</Month>
+                <Day>20</Day>
+                <Hour>6</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+        </History>
+        <PublicationStatus>aheadofprint</PublicationStatus>
+        <ArticleIdList>
+            <ArticleId IdType="pubmed">32949798</ArticleId>
+            <ArticleId IdType="pii">S1878-8750(20)32053-2</ArticleId>
+            <ArticleId IdType="doi">10.1016/j.wneu.2020.09.045</ArticleId>
+        </ArticleIdList>
+    </PubmedData>
+</PubmedArticle>
+</PubmedArticleSet>
