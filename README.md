@@ -1,4 +1,5 @@
 # Biomedical Information Retrieval
+This is a project relating to nlp in biomedical domain. There are search functions, tokenizer, ...
 ## Table of contents
 * [Code](#code)
 * [Data](#data)
